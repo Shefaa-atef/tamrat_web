@@ -28,7 +28,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-screen w-full overflow-hidden"
+    <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden md:min-h-screen"
       style={{ background: 'linear-gradient(160deg, #FEF8EE 0%, #FAF0E0 45%, #F5E8D4 100%)' }}
     >
       {/* Dot grid texture */}
@@ -57,10 +57,10 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-20 grid min-h-screen w-full place-items-center px-6">
-        <div className="flex w-full max-w-[1200px] -translate-y-[9vh] md:-translate-y-[8vh] flex-col items-center justify-center text-center">
+      <div className="relative z-20 grid min-h-[100svh] w-full place-items-center px-4 py-24 sm:px-6 sm:py-20 md:min-h-screen">
+        <div className="flex w-full max-w-[1200px] flex-col items-center justify-center pt-6 text-center sm:pt-0 sm:-translate-y-[4vh] md:-translate-y-[8vh]">
           <motion.div
-            className="pointer-events-none"
+            className="pointer-events-none mb-[-4.25rem] sm:mb-[-3.75rem] md:mb-[-3.5rem]"
             initial={{ opacity: 0, y: 22, scale: 0.9, filter: "blur(10px)" }}
             animate={
               canAnimate
@@ -72,9 +72,9 @@ export default function Hero() {
               ease: [0.22, 1, 0.36, 1],
             }}
             style={{
-              width: "clamp(520px, 66vw, 1080px)",
+              width: "clamp(280px, 92vw, 1080px)",
+              maxWidth: "100%",
               filter: "drop-shadow(0 18px 34px rgba(124, 61, 42, 0.12))",
-              marginBottom: "clamp(-104px, -7.1vw, -52px)",
             }}
           >
             <div style={{ overflow: "hidden" }}>
@@ -83,13 +83,13 @@ export default function Hero() {
                 animationData={logoAnimation}
                 loop={false}
                 autoplay={canAnimate}
-                style={{ display: "block", marginTop: "-2%", marginBottom: "-10%" }}
+                style={{ display: "block", marginTop: "-2%", marginBottom: "-12%" }}
               />
             </div>
           </motion.div>
 
           <motion.p
-            className="font-heading mt-0"
+            className="font-heading mt-0 max-w-[18ch] sm:max-w-none px-2 sm:px-0"
             initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
             animate={
               canAnimate
@@ -105,7 +105,7 @@ export default function Hero() {
               fontSize: "clamp(1.45rem, 2.9vw, 3.15rem)",
               fontWeight: 700,
               lineHeight: 1.15,
-              marginTop: "clamp(-22px, -1.9vw, -10px)",
+              marginTop: "clamp(-28px, -2.4vw, -10px)",
               color: "#7C3D2A",
               letterSpacing: "0.01em",
               textShadow: "0 8px 20px rgba(124, 61, 42, 0.12)",
