@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 export default defineConfig({
-  base: "/tamrat/",
+  base: "/tamrat_web/",
   plugins: [react(), tailwindcss()],
   assetsInclude: ["**/*.glb", "**/*.gltf"],
   resolve: {

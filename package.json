@@ -2,7 +2,7 @@
   "name": "tamrat-web",
   "private": true,
   "version": "0.1.0",
-  "homepage": "https://shefaa-atef.github.io/tamrat/",
+  "homepage": "https://shefaa-atef.github.io/tamrat_web/",
   "type": "module",
   "scripts": {
     "dev": "vite",
