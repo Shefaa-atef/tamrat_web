@@ -2,14 +2,25 @@
 
 @font-face {
   font-family: "Al Jazeera";
-  src:
-    url("./assets/fonts/Aljazeera.ttf") format("truetype"),
-    local("Al-Jazeera-Arabic-Bold"),
-    local("Al Jazeera Arabic Bold"),
-    local("AlJazeeraArabicBold"),
-    local("Al Jazeera Arabic");
-  font-weight: 400;
+  src: url("./assets/fonts/Al-Jazeera-Arabic-Light.ttf") format("truetype");
   font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Al Jazeera";
+  src: url("./assets/fonts/Al-Jazeera-Arabic-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Al Jazeera";
+  src: url("./assets/fonts/Al-Jazeera-Arabic-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
   font-display: swap;
 }
 
@@ -52,7 +63,7 @@ html {
 }
 
 /* Each section snaps to the top of the viewport when scrolling near it */
-main > section {
+main>section {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
 }
