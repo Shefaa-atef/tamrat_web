@@ -1,0 +1,148 @@
+﻿@import "tailwindcss";
+
+@font-face {
+  font-family: "Al Jazeera";
+  src:
+    local("Al-Jazeera-Arabic-Bold"),
+    local("Al Jazeera Arabic Bold"),
+    local("AlJazeeraArabicBold"),
+    local("Al Jazeera Arabic");
+  font-display: swap;
+}
+
+/* â”€â”€â”€ Design Tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@theme {
+  /* Brand colors */
+  --color-primary: #7C3D2A;
+  --color-primary-lt: #A05438;
+  --color-secondary: #C97B4B;
+  --color-accent: #F4C97E;
+
+  /* Backgrounds â€” clean white theme */
+  --color-bg: #FFFFFF;
+  --color-surface: #F7F2EA;
+  --color-surface-alt: #EDE4D4;
+
+  /* Text */
+  --color-cream: #1C0D04;
+  /* dark brown â€” "cream" now = dark text */
+  --color-muted: #8B6E52;
+  --color-glow: #C97B4B;
+
+  /* Typography */
+  --font-heading: "Al Jazeera", sans-serif;
+  --font-body: "Al Jazeera", sans-serif;
+}
+
+/* â”€â”€â”€ Base Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+/* Each section snaps to the top of the viewport when scrolling near it */
+main > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* The screenshots section is very tall (sticky scroll-driven) —
+   let the user scroll freely through it without snapping mid-section */
+#screenshots {
+  scroll-snap-align: none;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #1C0D04;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: auto;
+}
+
+/* â”€â”€â”€ Custom Scrollbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F7F2EA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7C3D2A;
+  border-radius: 2px;
+}
+
+/* â”€â”€â”€ Text Selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+::selection {
+  background-color: rgba(201, 123, 75, 0.25);
+  color: #7C3D2A;
+}
+
+/* â”€â”€â”€ Utility: heading font â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* â”€â”€â”€ Utility: glow text shadow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.text-glow {
+  text-shadow: 0 2px 24px rgba(124, 61, 42, 0.25), 0 0 48px rgba(201, 123, 75, 0.15);
+}
+
+/* â”€â”€â”€ Utility: blur-in animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@keyframes blur-in {
+  from {
+    filter: blur(20px);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.animate-blur-in {
+  animation: blur-in 0.8s ease forwards;
+}
+
+/* â”€â”€â”€ Utility: fade-in-up animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* â”€â”€â”€ Reduced motion: respect user preference â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

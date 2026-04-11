@@ -1,0 +1,37 @@
+{
+  "name": "tamrat-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "motion": "^12.0.0",
+    "@react-three/fiber": "^9.0.0",
+    "@react-three/drei": "^9.0.0",
+    "@react-three/postprocessing": "^3.0.0",
+    "postprocessing": "^6.0.0",
+    "three": "^0.172.0",
+    "lottie-react": "^2.4.0",
+    "lucide-react": "^0.469.0",
+    "gsap": "^3.12.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.172.0",
+    "@types/node": "^22.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.5"
+  }
+}
