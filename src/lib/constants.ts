@@ -2,6 +2,9 @@
 export const APP_LINKS = {
   appStore: "#",      // replace with real iOS link
   playStore: "#",     // replace with real Android link
+  privacyPolicy: "#/privacy-policy",
+  accountDeletion: "#/privacy-policy",
+  supportEmail: "tamrat.application@gmail.com",
   instagram: "#",
   twitter: "#",
 };
