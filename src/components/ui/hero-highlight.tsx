@@ -64,10 +64,10 @@ interface HighlightProps {
 export function Highlight({ children, className }: HighlightProps) {
   return (
     <motion.span
-      initial={{ backgroundSize: "0% 3px" }}
-      whileInView={{ backgroundSize: "100% 3px" }}
-      viewport={{ once: true }}
-      transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+      initial={{ backgroundSize: "0% 3px", opacity: 0.72, filter: "blur(4px)" }}
+      whileInView={{ backgroundSize: "100% 3px", opacity: 1, filter: "blur(0px)" }}
+      viewport={{ once: false }}
+      transition={{ duration: 1.35, ease: "easeOut", delay: 0.18 }}
       className={cn("relative inline-block pb-0.5", className)}
       style={{
         backgroundImage:

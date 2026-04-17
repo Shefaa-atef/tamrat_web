@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -85,20 +86,25 @@ const features: FeatureItem[] = [
 ];
 
 export default function Features() {
+  const { dir, t } = useLanguage();
+  const localizedFeatures = t.features.items.map((feature, index) => ({
+    ...feature,
+    icon: features[index].icon,
+  }));
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeFeature = features[activeIndex];
+  const activeFeature = localizedFeatures[activeIndex];
   const ActiveIcon = activeFeature.icon;
   const goNext = () => {
-    setActiveIndex((prev) => (prev + 1) % features.length);
+    setActiveIndex((prev) => (prev + 1) % localizedFeatures.length);
   };
   const goPrev = () => {
-    setActiveIndex((prev) => (prev - 1 + features.length) % features.length);
+    setActiveIndex((prev) => (prev - 1 + localizedFeatures.length) % localizedFeatures.length);
   };
   const selectFeature = (index: number) => {
     setActiveIndex(index);
   };
   const featureAt = (index: number) =>
-    features[(index + features.length) % features.length];
+    localizedFeatures[(index + localizedFeatures.length) % localizedFeatures.length];
   const slides = [
     { feature: featureAt(activeIndex - 1), position: "prev" as const },
     { feature: activeFeature, position: "active" as const },
@@ -115,12 +121,12 @@ export default function Features() {
         padding: "clamp(58px, 10vw, 88px) 0 clamp(64px, 11vw, 96px)",
       }}
     >
-      <div dir="rtl" style={{ width: "100%", margin: "0 auto" }}>
+      <div dir={dir} style={{ width: "100%", margin: "0 auto" }}>
         <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.75, ease }}
+          initial={{ opacity: 0, y: 64, scale: 0.96, filter: "blur(16px)" }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.95, ease }}
           style={{
             width: "100%",
             maxWidth: 980,
@@ -138,7 +144,7 @@ export default function Features() {
               marginBottom: 18,
             }}
           >
-            مميزات تمرات
+            {t.features.badge}
           </span>
           <h2
             className="font-heading text-[1.85rem] sm:text-[2.25rem] 2xl:text-[3.25rem]"
@@ -149,7 +155,7 @@ export default function Features() {
               margin: 0,
             }}
           >
-            مزايا واضحة تساعدك على الاستمرار
+            {t.features.title}
           </h2>
           <p
             className="mt-4 hidden 2xl:block"
@@ -163,16 +169,16 @@ export default function Features() {
               marginTop: 12,
             }}
           >
-            خطة الصيام، التقدم، والاقتراحات اليومية في تجربة واحدة بسيطة بدون تعقيد.
+            {t.features.body}
           </p>
         </motion.div>
 
         <div className="hidden 2xl:block" style={{ width: "100%", maxWidth: 1600, margin: "0 auto", paddingInline: "clamp(18px, 4vw, 56px)" }}>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.62, ease }}
+            initial={{ opacity: 0, y: 78, scale: 0.94, rotate: -1.5, filter: "blur(16px)" }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0, filter: "blur(0px)" }}
+            viewport={{ once: false, margin: "-80px" }}
+            transition={{ duration: 0.88, ease }}
             style={{ width: "100%", margin: "0 auto" }}
           >
             <div
@@ -223,7 +229,7 @@ export default function Features() {
                         scale: { duration: 0.24 },
                       }}
                       onClick={() => {
-                        const index = features.findIndex((item) => item.id === feature.id);
+                        const index = localizedFeatures.findIndex((item) => item.id === feature.id);
                         if (index !== activeIndex) {
                           selectFeature(index);
                         }
@@ -348,7 +354,7 @@ export default function Features() {
                 type="button"
                 onClick={goPrev}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-[#DCC9B6] bg-white/90 text-[#7C3D2A] shadow-[0_4px_10px_rgba(46,25,13,0.08)] transition hover:border-[#C9AA92] hover:bg-[#FFFCF8]"
-                aria-label="السابق"
+                aria-label={t.common.previous}
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -357,7 +363,7 @@ export default function Features() {
                 type="button"
                 onClick={goNext}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-[#DCC9B6] bg-white/90 text-[#7C3D2A] shadow-[0_4px_10px_rgba(46,25,13,0.08)] transition hover:border-[#C9AA92] hover:bg-[#FFFCF8]"
-                aria-label="التالي"
+                aria-label={t.common.next}
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -367,17 +373,17 @@ export default function Features() {
 
         <motion.div
           className="2xl:hidden w-full mx-auto md:max-w-[700px]"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.55, ease }}
+          initial={{ opacity: 0, y: 72, scale: 0.94, filter: "blur(14px)" }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+          viewport={{ once: false, margin: "-40px" }}
+          transition={{ duration: 0.82, ease }}
           style={{ paddingInline: "clamp(18px, 4vw, 40px)", margin: "0 auto" }}
         >
           <motion.article
             key={activeFeature.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.26, ease }}
+            initial={{ opacity: 0, y: 28, scale: 0.96, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.36, ease }}
             style={{
               border: "1px solid #E7D7C5",
               borderRadius: 16,
@@ -420,7 +426,7 @@ export default function Features() {
                     fontWeight: 700,
                   }}
                 >
-                  {String(activeIndex + 1).padStart(2, "0")} / {String(features.length).padStart(2, "0")}
+                  {String(activeIndex + 1).padStart(2, "0")} / {String(localizedFeatures.length).padStart(2, "0")}
                 </span>
               </div>
             </div>
@@ -516,18 +522,18 @@ export default function Features() {
                 justifyContent: "center",
                 boxShadow: "0 6px 14px rgba(46,25,13,0.08)",
               }}
-              aria-label="Previous feature"
+              aria-label={t.common.previous}
             >
               <ChevronRight size={18} />
             </button>
 
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
-              {features.map((feature, index) => (
+              {localizedFeatures.map((feature, index) => (
                 <button
                   key={feature.id}
                   type="button"
                   onClick={() => selectFeature(index)}
-                  aria-label={`Feature ${index + 1}`}
+                  aria-label={`${t.common.featureLabel} ${index + 1}`}
                   style={{
                     width: index === activeIndex ? 22 : 7,
                     height: 7,
@@ -555,7 +561,7 @@ export default function Features() {
                 justifyContent: "center",
                 boxShadow: "0 6px 14px rgba(46,25,13,0.08)",
               }}
-              aria-label="Next feature"
+              aria-label={t.common.next}
             >
               <ChevronLeft size={18} />
             </button>

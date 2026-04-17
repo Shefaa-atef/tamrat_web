@@ -1,16 +1,6 @@
 import logoUrl from "../../../assets/main/logo circle.svg";
 import { APP_LINKS } from "@/lib/constants";
-
-const productLinks = [
-  { label: "المميزات", href: "#features" },
-  { label: "كيف يعمل", href: "#how-it-works" },
-  { label: "التحميل", href: "#download" },
-];
-
-const legalLinks = [
-  { label: "سياسة الخصوصية", href: APP_LINKS.privacyPolicy },
-  { label: "حذف الحساب", href: APP_LINKS.accountDeletion },
-];
+import { useLanguage } from "@/lib/i18n";
 
 function FooterLink({ label, href }: { label: string; href: string }) {
   return (
@@ -30,9 +20,15 @@ function FooterLink({ label, href }: { label: string; href: string }) {
 }
 
 export default function Footer() {
+  const { dir, t } = useLanguage();
+  const legalLinks = t.footer.legalLinks.map((link, index) => ({
+    ...link,
+    href: index === 0 ? APP_LINKS.privacyPolicy : APP_LINKS.accountDeletion,
+  }));
+
   return (
     <footer
-      dir="rtl"
+      dir={dir}
       style={{
         background:
           "linear-gradient(180deg, #FFFFFF 0%, #FFF8EF 48%, #F7ECDE 100%)",
@@ -60,7 +56,7 @@ export default function Footer() {
         >
           <a
             href="#hero"
-            aria-label="Tamrat"
+            aria-label={t.common.logoAlt}
             style={{
               alignItems: "center",
               color: "#1C0D04",
@@ -72,7 +68,7 @@ export default function Footer() {
           >
             <img
               src={logoUrl}
-              alt="Tamrat"
+              alt={t.common.logoAlt}
               style={{
                 filter: "drop-shadow(0 8px 18px rgba(124,61,42,0.12))",
                 height: 50,
@@ -90,7 +86,7 @@ export default function Footer() {
                   lineHeight: 1.3,
                 }}
               >
-                تمرات
+                {t.common.appName}
               </strong>
               <span
                 style={{
@@ -100,7 +96,7 @@ export default function Footer() {
                   lineHeight: 1.6,
                 }}
               >
-                رفيقك الذكي لصيام أسهل وثبات أجمل.
+                {t.footer.tagline}
               </span>
             </span>
           </a>
@@ -127,7 +123,7 @@ export default function Footer() {
               whiteSpace: "nowrap",
             }}
           >
-            تواصل معنا
+            {t.footer.contact}
             <span
               dir="ltr"
               style={{
@@ -159,7 +155,7 @@ export default function Footer() {
               gap: "12px 20px",
             }}
           >
-            {productLinks.map((link) => (
+            {t.footer.productLinks.map((link) => (
               <FooterLink key={link.href} {...link} />
             ))}
             {legalLinks.map((link) => (
@@ -176,7 +172,7 @@ export default function Footer() {
               margin: 0,
             }}
           >
-            © 2026 تمرات. كل الحقوق محفوظة.
+            {t.footer.copyright}
           </p>
         </div>
       </div>

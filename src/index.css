@@ -1,4 +1,5 @@
-﻿@import "tailwindcss";
+﻿@import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap");
+@import "tailwindcss";
 
 @font-face {
   font-family: "Al Jazeera";
@@ -46,6 +47,11 @@
   /* Typography */
   --font-heading: "Al Jazeera", sans-serif;
   --font-body: "Al Jazeera", sans-serif;
+}
+
+html[lang="en"] {
+  --font-heading: "ABeeZee", sans-serif;
+  --font-body: "ABeeZee", sans-serif;
 }
 
 /* â”€â”€â”€ Base Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */

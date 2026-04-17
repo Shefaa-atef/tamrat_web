@@ -16,6 +16,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import logoUrl from "../../assets/main/logo circle.svg";
 import { APP_LINKS } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -70,27 +71,15 @@ const policyRows: PolicyRow[] = [
   },
 ];
 
-const quickFacts = [
-  "لا نبيع بياناتك الشخصية",
-  "حذف الحساب متاح من التطبيق أو البريد",
-  "بيانات الدورة والحمل اختيارية",
-];
-
-const deleteSubject = encodeURIComponent("حذف حساب تمرات");
-const deleteBody = encodeURIComponent(
-  "السلام عليكم فريق تمرات،\n\nأرغب بحذف حسابي في تمرات والبيانات المتزامنة المرتبطة به.\n\nالبريد المسجل في الحساب:\nسبب الطلب، اختياري:\n\nشكرا لكم."
-);
-const deletionEmailUrl = `${APP_LINKS.contactEmail}&su=${deleteSubject}&body=${deleteBody}`;
-
 function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
   const Icon = row.icon;
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, ease, delay: index * 0.035 }}
+      initial={{ opacity: 0, y: 50, scale: 0.96, filter: "blur(12px)" }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      viewport={{ once: false, margin: "-40px" }}
+      transition={{ duration: 0.68, ease, delay: index * 0.045 }}
       style={{
         background: "#FFFFFF",
         border: "1px solid #E8D8C7",
@@ -149,6 +138,8 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
 }
 
 function SidePanel() {
+  const { t } = useLanguage();
+
   return (
     <aside
       style={{
@@ -181,10 +172,10 @@ function SidePanel() {
             margin: "0 0 8px",
           }}
         >
-          ملخص سريع
+          {t.privacy.summaryTitle}
         </h2>
         <div style={{ display: "grid", gap: 10 }}>
-          {quickFacts.map((fact) => (
+          {t.privacy.quickFacts.map((fact) => (
             <div
               key={fact}
               style={{
@@ -237,7 +228,7 @@ function SidePanel() {
             fontWeight: 800,
           }}
         >
-          تواصل معنا
+          {t.privacy.contactTitle}
         </strong>
         <span
           dir="ltr"
@@ -258,9 +249,18 @@ function SidePanel() {
 }
 
 export default function PrivacyPolicyPage() {
+  const { dir, t } = useLanguage();
+  const localizedPolicyRows = t.privacy.rows.map((row, index) => ({
+    ...row,
+    icon: policyRows[index].icon,
+  }));
+  const deleteSubject = encodeURIComponent(t.privacy.deleteSubject);
+  const deleteBody = encodeURIComponent(t.privacy.deleteBody);
+  const deletionEmailUrl = `${APP_LINKS.contactEmail}&su=${deleteSubject}&body=${deleteBody}`;
+
   return (
     <main
-      dir="rtl"
+      dir={dir}
       style={{
         background:
           "linear-gradient(180deg, #FEF8EE 0%, #FFFFFF 32%, #FFF8EF 100%)",
@@ -298,7 +298,7 @@ export default function PrivacyPolicyPage() {
               }}
             >
               <ArrowRight size={17} />
-              العودة للرئيسية
+              {t.privacy.backHome}
             </a>
 
             <span
@@ -314,7 +314,7 @@ export default function PrivacyPolicyPage() {
                 padding: "8px 15px",
               }}
             >
-              آخر تحديث: 17 نيسان 2026
+              {t.privacy.updated}
             </span>
 
             <h1
@@ -327,7 +327,7 @@ export default function PrivacyPolicyPage() {
                 margin: "20px 0 18px",
               }}
             >
-              سياسة الخصوصية
+              {t.privacy.title}
             </h1>
             <p
               style={{
@@ -339,7 +339,7 @@ export default function PrivacyPolicyPage() {
                 maxWidth: 820,
               }}
             >
-              توضح هذه الصفحة كيف يتعامل تطبيق تمرات مع البيانات التي تختارها داخل التطبيق، وكيف تستخدمها تمرات لتقديم التقويم، خطة الصوم، التذكيرات، ومزامنة الحساب.
+              {t.privacy.intro}
             </p>
           </div>
 
@@ -358,7 +358,7 @@ export default function PrivacyPolicyPage() {
           >
             <img
               src={logoUrl}
-              alt="Tamrat"
+              alt={t.common.logoAlt}
               style={{
                 filter: "drop-shadow(0 12px 24px rgba(124,61,42,0.12))",
                 height: 78,
@@ -378,16 +378,16 @@ export default function PrivacyPolicyPage() {
           className="max-lg:grid-cols-1"
         >
           <div style={{ display: "grid", gap: 14 }}>
-            {policyRows.map((row, index) => (
+            {localizedPolicyRows.map((row, index) => (
               <PolicyRowCard key={row.title} row={row} index={index} />
             ))}
 
             <motion.section
               id="account-deletion"
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, ease }}
+              initial={{ opacity: 0, y: 58, scale: 0.96, filter: "blur(14px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.76, ease }}
               style={{
                 background:
                   "linear-gradient(135deg, rgba(124,61,42,0.08), rgba(244,201,126,0.16))",
@@ -426,7 +426,7 @@ export default function PrivacyPolicyPage() {
                     margin: "0 0 10px",
                   }}
                 >
-                  حذف الحساب والبيانات
+                  {t.privacy.accountDeletionTitle}
                 </h2>
                 <p
                   style={{
@@ -437,7 +437,7 @@ export default function PrivacyPolicyPage() {
                     margin: "0 0 18px",
                   }}
                 >
-                  يمكنك حذف حساب تمرات والبيانات المتزامنة من داخل التطبيق عبر الملف الشخصي ثم حذف الحساب. إذا لم تستطع الوصول إلى التطبيق، أرسل طلبا من بريد حسابك المسجل وسنساعدك في التحقق من الحساب وحذف البيانات المتزامنة المرتبطة به.
+                  {t.privacy.accountDeletionBody}
                 </p>
 
                 <div
@@ -466,7 +466,7 @@ export default function PrivacyPolicyPage() {
                     }}
                   >
                     <Mail size={17} />
-                    طلب حذف الحساب
+                    {t.privacy.requestDeletion}
                   </a>
                   <a
                     href={APP_LINKS.contactEmail}
@@ -486,7 +486,7 @@ export default function PrivacyPolicyPage() {
                       textDecoration: "none",
                     }}
                   >
-                    تواصل معنا
+                    {t.privacy.contactUs}
                   </a>
                 </div>
               </div>

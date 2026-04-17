@@ -8,6 +8,7 @@ import {
 } from "motion/react";
 import { Bell, Sparkles, TrendingUp, UserPlus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 interface StepItem {
   n: number;
@@ -142,8 +143,13 @@ function StepCard({
   const Icon = step.icon;
   return (
     <motion.div
-      animate={{ opacity: active ? 1 : 0.22, y: active ? 0 : 12 }}
-      transition={{ duration: 0.6, ease }}
+      animate={{
+        opacity: active ? 1 : 0.18,
+        y: active ? 0 : 34,
+        scale: active ? 1 : 0.92,
+        filter: active ? "blur(0px)" : "blur(2px)",
+      }}
+      transition={{ duration: 0.72, ease }}
       style={{
         background: isCurrent ? "rgba(124,61,42,0.045)" : "transparent",
         border: `1.5px solid ${active ? "rgba(124,61,42,0.18)" : "rgba(124,61,42,0.07)"}`,
@@ -220,9 +226,23 @@ function StepCard({
 }
 
 /* ── Shared section header ── */
-function SectionHeader({ compact = false }: { compact?: boolean }) {
+function SectionHeader({
+  compact = false,
+  badge,
+  title,
+  body,
+  dir,
+  textAlign,
+}: {
+  compact?: boolean;
+  badge: string;
+  title: string;
+  body: string;
+  dir: "rtl" | "ltr";
+  textAlign: "right" | "left";
+}) {
   return (
-    <div dir="rtl" style={{ textAlign: "right", marginBottom: compact ? 26 : 48 }}>
+    <div dir={dir} style={{ textAlign, marginBottom: compact ? 26 : 48 }}>
       <span
         style={{
           background: "rgba(124,61,42,0.08)",
@@ -236,7 +256,7 @@ function SectionHeader({ compact = false }: { compact?: boolean }) {
           marginBottom: compact ? 12 : 16,
         }}
       >
-        كيف يعمل
+        {badge}
       </span>
       <h2
         style={{
@@ -248,7 +268,7 @@ function SectionHeader({ compact = false }: { compact?: boolean }) {
           fontFamily: "var(--font-heading)",
         }}
       >
-        أربع خطوات تجعلك أقرب لباب الريّان
+        {title}
       </h2>
       <p
         style={{
@@ -259,7 +279,7 @@ function SectionHeader({ compact = false }: { compact?: boolean }) {
           margin: 0,
         }}
       >
-        من أول مرة تفتح التطبيق، إلى يوم تُكمل آخر يوم في قضائك.
+        {body}
       </p>
     </div>
   );
@@ -269,6 +289,11 @@ function SectionHeader({ compact = false }: { compact?: boolean }) {
    Main section
 ══════════════════════════════════════════ */
 export default function HowItWorks() {
+  const { dir, isArabic, t } = useLanguage();
+  const localizedSteps = t.howItWorks.steps.map((step, index) => ({
+    ...step,
+    icon: steps[index].icon,
+  }));
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(-1);
 
@@ -313,14 +338,20 @@ export default function HowItWorks() {
           }}
         >
           <div style={{ maxWidth: 1160, margin: "0 auto", width: "100%" }}>
-            <SectionHeader />
+            <SectionHeader
+              badge={t.howItWorks.badge}
+              title={t.howItWorks.title}
+              body={t.howItWorks.body}
+              dir={dir}
+              textAlign={isArabic ? "right" : "left"}
+            />
 
             {/* Step circles + connectors */}
             <div
-              dir="rtl"
+              dir={dir}
               style={{ display: "flex", alignItems: "center", marginBottom: 20 }}
             >
-              {steps.map((step, i) => (
+              {localizedSteps.map((step, i) => (
                 <Fragment key={step.n}>
                   <StepCircle n={step.n} active={i <= activeStep} />
                   {i < steps.length - 1 && <HLine progress={lineValues[i]} />}
@@ -330,14 +361,14 @@ export default function HowItWorks() {
 
             {/* Step cards */}
             <div
-              dir="rtl"
+              dir={dir}
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(4, 1fr)",
                 gap: 14,
               }}
             >
-              {steps.map((step, i) => (
+              {localizedSteps.map((step, i) => (
                 <StepCard
                   key={step.n}
                   step={step}
@@ -360,7 +391,7 @@ export default function HowItWorks() {
                 letterSpacing: "0.06em",
               }}
             >
-              ↓ &nbsp; مرّر للأسفل
+              {t.howItWorks.scrollHint}
             </motion.p>
           </div>
         </div>
@@ -374,19 +405,26 @@ export default function HowItWorks() {
           padding: "64px clamp(18px, 5vw, 28px) 72px",
         }}
       >
-        <div dir="rtl" style={{ maxWidth: 460, margin: "0 auto" }}>
-          <SectionHeader compact />
+        <div dir={dir} style={{ maxWidth: 460, margin: "0 auto" }}>
+          <SectionHeader
+            compact
+            badge={t.howItWorks.badge}
+            title={t.howItWorks.title}
+            body={t.howItWorks.body}
+            dir={dir}
+            textAlign={isArabic ? "right" : "left"}
+          />
 
           <div style={{ display: "grid", gap: 12 }}>
-            {steps.map((step, i) => {
+            {localizedSteps.map((step, i) => {
               const Icon = step.icon;
               return (
                 <motion.article
                   key={step.n}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-45px" }}
-                  transition={{ duration: 0.52, delay: i * 0.05, ease }}
+                  initial={{ opacity: 0, y: 64, x: 18, scale: 0.94, filter: "blur(12px)" }}
+                  whileInView={{ opacity: 1, y: 0, x: 0, scale: 1, filter: "blur(0px)" }}
+                  viewport={{ once: false, margin: "-45px" }}
+                  transition={{ duration: 0.74, delay: i * 0.07, ease }}
                   style={{
                     display: "grid",
                     gridTemplateColumns: "42px minmax(0, 1fr)",
@@ -473,10 +511,10 @@ export default function HowItWorks() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, ease }}
+            initial={{ opacity: 0, y: 34, scale: 0.92, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            viewport={{ once: false, margin: "-40px" }}
+            transition={{ duration: 0.68, ease }}
             style={{
               display: "flex",
               alignItems: "center",
@@ -485,7 +523,7 @@ export default function HowItWorks() {
               marginTop: 18,
             }}
           >
-            {steps.map((step) => (
+            {localizedSteps.map((step) => (
               <span
                 key={step.n}
                 style={{

@@ -1,19 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import logoUrl from "../../../assets/main/logo circle.svg";
-
-const NAV_LINKS = [
-  { label: "المميزات", href: "#features" },
-  { label: "كيف يعمل", href: "#how-it-works" },
-  { label: "الفئات المستهدفة", href: "#audience" },
-  { label: "داخل التطبيق", href: "#screenshots" },
-];
+import { useLanguage } from "@/lib/i18n";
 
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const [atTop, setAtTop] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastY = useRef(0);
+  const { dir, isArabic, t, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => {
@@ -39,6 +34,7 @@ export default function Navbar() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "-100%", opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          dir={dir}
           style={{
             position: "fixed",
             inset: "0 0 auto 0",
@@ -49,9 +45,7 @@ export default function Navbar() {
             boxShadow: atTop ? "none" : "0 1px 0 rgba(193,113,36,0.12)",
             transition: "background 0.35s, box-shadow 0.35s",
           }}
-          dir="rtl"
         >
-          {/* flex row: logo on right (RTL), CTA on left (RTL), nav absolutely centered */}
           <div
             style={{
               position: "relative",
@@ -61,16 +55,14 @@ export default function Navbar() {
               padding: "12px 40px",
             }}
           >
-            {/* Logo — right in RTL */}
-            <a href="#hero" aria-label="Tamrat">
+            <a href="#hero" aria-label={t.common.logoAlt}>
               <img
                 src={logoUrl}
-                alt="Tamrat"
+                alt={t.common.logoAlt}
                 style={{ width: 44, height: 44, objectFit: "contain" }}
               />
             </a>
 
-            {/* Nav — absolute center, hidden on mobile */}
             <nav
               style={{
                 position: "absolute",
@@ -80,7 +72,7 @@ export default function Navbar() {
               }}
               className="hidden md:flex md:items-center md:gap-7"
             >
-              {NAV_LINKS.map((link) => (
+              {t.nav.links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -91,82 +83,127 @@ export default function Navbar() {
                     textDecoration: "none",
                     transition: "color 0.15s",
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#4A2D1E")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(122,80,56,0.85)")}
+                  onMouseEnter={(event) => {
+                    event.currentTarget.style.color = "#4A2D1E";
+                  }}
+                  onMouseLeave={(event) => {
+                    event.currentTarget.style.color = "rgba(122,80,56,0.85)";
+                  }}
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
 
-            {/* Hamburger Menu — mobile only */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            <div
               style={{
-                flexDirection: "column",
-                gap: 6,
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 8,
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                flexDirection: isArabic ? "row" : "row-reverse",
               }}
-              className="flex md:hidden flex-col"
-              aria-label="Toggle menu"
             >
-              <span
+              <motion.button
+                type="button"
+                onClick={toggleLanguage}
+                whileHover={{ y: -1, scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                aria-label={t.common.languageButtonLabel}
                 style={{
-                  width: 24,
-                  height: 2,
-                  background: "rgba(122,80,56,0.85)",
-                  borderRadius: 1,
-                  transition: "all 0.3s",
-                  transform: mobileMenuOpen ? "rotate(45deg) translate(8px, 8px)" : "none",
+                  alignItems: "center",
+                  background: "#FFFFFF",
+                  border: "1px solid rgba(226,204,181,0.95)",
+                  borderRadius: "50%",
+                  boxShadow: "0 8px 18px rgba(124,61,42,0.12)",
+                  color: "#7C3D2A",
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  fontFamily: "var(--font-heading)",
+                  fontSize: 13,
+                  fontWeight: 800,
+                  height: 44,
+                  justifyContent: "center",
+                  lineHeight: 1,
+                  width: 44,
                 }}
-              />
-              <span
-                style={{
-                  width: 24,
-                  height: 2,
-                  background: "rgba(122,80,56,0.85)",
-                  borderRadius: 1,
-                  transition: "all 0.3s",
-                  opacity: mobileMenuOpen ? 0 : 1,
-                }}
-              />
-              <span
-                style={{
-                  width: 24,
-                  height: 2,
-                  background: "rgba(122,80,56,0.85)",
-                  borderRadius: 1,
-                  transition: "all 0.3s",
-                  transform: mobileMenuOpen ? "rotate(-45deg) translate(8px, -8px)" : "none",
-                }}
-              />
-            </button>
+              >
+                {t.common.languageButton}
+              </motion.button>
 
-            {/* CTA — left in RTL */}
-            <a
-              href="#download"
-              className="hidden md:inline-flex"
-              style={{
-                background: "linear-gradient(135deg, #C17124 0%, #8F5218 100%)",
-                color: "#fff",
-                fontWeight: 700,
-                fontSize: 14,
-                padding: "8px 22px",
-                borderRadius: 8,
-                textDecoration: "none",
-                transition: "opacity 0.2s",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
-              onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-            >
-              تحميل
-            </a>
+              <a
+                href="#download"
+                className="hidden md:inline-flex"
+                style={{
+                  background: "linear-gradient(135deg, #C17124 0%, #8F5218 100%)",
+                  color: "#fff",
+                  fontWeight: 700,
+                  fontSize: 14,
+                  padding: "8px 22px",
+                  borderRadius: 8,
+                  textDecoration: "none",
+                  transition: "opacity 0.2s",
+                }}
+                onMouseEnter={(event) => {
+                  event.currentTarget.style.opacity = "0.85";
+                }}
+                onMouseLeave={(event) => {
+                  event.currentTarget.style.opacity = "1";
+                }}
+              >
+                {t.nav.download}
+              </a>
+
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                style={{
+                  flexDirection: "column",
+                  gap: 6,
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: 8,
+                }}
+                className="flex md:hidden flex-col"
+                aria-label={t.nav.toggleMenu}
+              >
+                <span
+                  style={{
+                    width: 24,
+                    height: 2,
+                    background: "rgba(122,80,56,0.85)",
+                    borderRadius: 1,
+                    transition: "all 0.3s",
+                    transform: mobileMenuOpen
+                      ? "rotate(45deg) translate(8px, 8px)"
+                      : "none",
+                  }}
+                />
+                <span
+                  style={{
+                    width: 24,
+                    height: 2,
+                    background: "rgba(122,80,56,0.85)",
+                    borderRadius: 1,
+                    transition: "all 0.3s",
+                    opacity: mobileMenuOpen ? 0 : 1,
+                  }}
+                />
+                <span
+                  style={{
+                    width: 24,
+                    height: 2,
+                    background: "rgba(122,80,56,0.85)",
+                    borderRadius: 1,
+                    transition: "all 0.3s",
+                    transform: mobileMenuOpen
+                      ? "rotate(-45deg) translate(8px, -8px)"
+                      : "none",
+                  }}
+                />
+              </button>
+            </div>
           </div>
 
-          {/* Mobile Menu Dropdown */}
           <AnimatePresence>
             {mobileMenuOpen && (
               <motion.div
@@ -185,7 +222,7 @@ export default function Navbar() {
                 }}
                 className="md:hidden"
               >
-                {NAV_LINKS.map((link) => (
+                {t.nav.links.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
@@ -199,8 +236,12 @@ export default function Navbar() {
                       borderBottom: "1px solid rgba(193,113,36,0.08)",
                       transition: "background 0.15s",
                     }}
-                    onMouseEnter={e => (e.currentTarget.style.background = "rgba(193,113,36,0.05)")}
-                    onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                    onMouseEnter={(event) => {
+                      event.currentTarget.style.background = "rgba(193,113,36,0.05)";
+                    }}
+                    onMouseLeave={(event) => {
+                      event.currentTarget.style.background = "transparent";
+                    }}
                   >
                     {link.label}
                   </a>

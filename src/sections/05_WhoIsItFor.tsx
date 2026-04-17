@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Moon, Plane, Sparkles, Heart } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/lib/i18n";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -15,7 +16,7 @@ interface WordItem {
   color: string;
 }
 
-const words: WordItem[] = [
+const wordsBase: WordItem[] = [
   {
     id: "women",
     word: "النساء",
@@ -94,6 +95,8 @@ function InteractiveWord({
   item,
   active,
   supportsHover,
+  detailsPrefix,
+  textAlign,
   onEnter,
   onLeave,
   onClick,
@@ -101,6 +104,8 @@ function InteractiveWord({
   item: WordItem;
   active: boolean;
   supportsHover: boolean;
+  detailsPrefix: string;
+  textAlign: "right" | "left";
   onEnter: () => void;
   onLeave: () => void;
   onClick: () => void;
@@ -117,7 +122,7 @@ function InteractiveWord({
         onFocus={onEnter}
         onClick={onClick}
         aria-expanded={active}
-        aria-label={`تفاصيل ${item.word}`}
+        aria-label={`${detailsPrefix} ${item.word}`}
         animate={{
           color: active ? item.color : "rgba(28,13,4,0.8)",
           backgroundColor: active ? `${item.color}18` : "rgba(0,0,0,0)",
@@ -162,10 +167,10 @@ function InteractiveWord({
             }}
           >
             <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.95 }}
-              transition={{ duration: 0.26, ease }}
+              initial={{ opacity: 0, y: 22, scale: 0.9, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: 22, scale: 0.9, filter: "blur(8px)" }}
+              transition={{ duration: 0.34, ease }}
               style={{
                 width: 340,
                 maxWidth: "82vw",
@@ -177,7 +182,7 @@ function InteractiveWord({
                 padding: "18px 20px",
                 boxShadow: `0 20px 60px ${item.color}22, 0 4px 16px rgba(0,0,0,0.07)`,
                 backdropFilter: "blur(16px)",
-                textAlign: "right",
+                textAlign,
               }}
             >
               {/* icon + label row */}
@@ -258,6 +263,12 @@ function InteractiveWord({
    Main section
 ══════════════════════════════════════════ */
 export default function WhoIsItFor() {
+  const { dir, isArabic, t } = useLanguage();
+  const words = t.audience.words.map((word, index) => ({
+    ...word,
+    icon: wordsBase[index].icon,
+    color: wordsBase[index].color,
+  }));
   const [active, setActive] = useState<WordId | null>(null);
   const [supportsHover, setSupportsHover] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -318,11 +329,11 @@ export default function WhoIsItFor() {
 
       <motion.div
         ref={containerRef}
-        dir="rtl"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.75, ease }}
+        dir={dir}
+        initial={{ opacity: 0, y: 70, scale: 0.94, filter: "blur(16px)" }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.95, ease }}
         style={{
           margin: "0 auto",
           textAlign: "center",
@@ -340,7 +351,7 @@ export default function WhoIsItFor() {
           overflow: "visible",
         }}
       >
-        <span>تمرات مخصص لـ</span>
+        <span>{t.audience.intro}</span>
 
         {words.map((item, i) => (
           <span
@@ -348,12 +359,14 @@ export default function WhoIsItFor() {
             style={{ display: "inline-flex", alignItems: "center", gap: "clamp(3px, 0.4vw, 6px)", whiteSpace: "nowrap" }}
           >
             {i > 0 && (
-              <span style={{ color: "#C17124", fontWeight: 500 }}>و</span>
+              <span style={{ color: "#C17124", fontWeight: 500 }}>{t.audience.conjunction}</span>
             )}
             <InteractiveWord
               item={item}
               active={active === item.id}
               supportsHover={supportsHover}
+              detailsPrefix={t.audience.detailsPrefix}
+              textAlign={isArabic ? "right" : "left"}
               onEnter={() => setActive(item.id)}
               onLeave={() => setActive(null)}
               onClick={() => setActive((prev) => (prev === item.id ? null : item.id))}

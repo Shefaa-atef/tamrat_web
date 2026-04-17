@@ -11,6 +11,7 @@ import scrFastDetailMonday from "../../assets/light_theme_app/fast_detail_monday
 import scrFasts from "../../assets/light_theme_app/fasts_all days nafelah and sunnah.png";
 import scrProfile from "../../assets/light_theme_app/profile_page.png";
 import scrCards from "../../assets/light_theme_app/cards_and markers in calendar.png";
+import { useLanguage } from "@/lib/i18n";
 
 // ─── Screen data ──────────────────────────────────────────────────────────────
 const screens = [
@@ -125,9 +126,14 @@ function IPhone({ src }: { src: string }) {
 
 // ─── Section ──────────────────────────────────────────────────────────────────
 export default function Screenshots() {
+  const { dir, t } = useLanguage();
+  const localizedScreens = t.screenshots.screens.map((screen, index) => ({
+    ...screen,
+    src: screens[index]?.src ?? scrCalendar,
+  }));
   const [active, setActive] = useState(0);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const activeProgress = screens.length > 1 ? active / (screens.length - 1) : 0;
+  const activeProgress = localizedScreens.length > 1 ? active / (localizedScreens.length - 1) : 0;
   const phoneScale = 1 + activeProgress * 0.22;
 
   // Desktop sticky viewport is driven by hidden scroll steps.
@@ -186,11 +192,11 @@ export default function Screenshots() {
 
         {/* ── Heading ── */}
         <motion.div
-          dir="rtl"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.85, ease }}
+          dir={dir}
+          initial={{ opacity: 0, y: 64, scale: 0.96, filter: "blur(16px)" }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.98, ease }}
           className="pt-10 pb-16 md:pb-14"
           style={{ paddingTop: 0 }}
         >
@@ -217,7 +223,7 @@ export default function Screenshots() {
                 letterSpacing: "0.02em",
               }}
             >
-              داخل التطبيق
+              {t.screenshots.badge}
             </span>
 
             <h2
@@ -230,7 +236,7 @@ export default function Screenshots() {
                 marginBottom: "0.7rem",
               }}
             >
-              شاشات توضّح ما الذي ستفعله بالضبط
+              {t.screenshots.title}
             </h2>
             <p
               style={{
@@ -240,7 +246,7 @@ export default function Screenshots() {
                 lineHeight: 1.85,
               }}
             >
-              كل لقطة من التطبيق توضّح قرارًا فعليًا: متى تصوم، لماذا، وما الذي تغيّر في خطتك.
+              {t.screenshots.body}
             </p>
           </div>
         </motion.div>
@@ -265,7 +271,7 @@ export default function Screenshots() {
             >
               <div
                 className="flex items-center gap-14"
-                dir="rtl"
+                dir={dir}
                 style={{ width: "100%" }}
               >
                 {/* Phone — visual right in RTL flex */}
@@ -278,7 +284,7 @@ export default function Screenshots() {
                       transformOrigin: "center center",
                     }}
                   >
-                    <IPhone src={screens[active].src} />
+                    <IPhone src={localizedScreens[active].src} />
                   </motion.div>
                 </div>
 
@@ -286,10 +292,10 @@ export default function Screenshots() {
                 <div style={{ flex: 1, perspective: 1600 }}>
                   <motion.div
                     key={`tablet-text-${active}`}
-                    initial={{ opacity: 0, y: -26, rotateX: -86, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-                    transition={{ duration: 0.58, ease }}
-                    dir="rtl"
+                    initial={{ opacity: 0, y: -44, rotateX: -88, scale: 0.92, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.72, ease }}
+                    dir={dir}
                     style={{
                       transformStyle: "preserve-3d",
                       transformOrigin: "center top",
@@ -312,7 +318,7 @@ export default function Screenshots() {
                         marginBottom: "0.75rem",
                       }}
                     >
-                      {screens[active].title}
+                      {localizedScreens[active].title}
                     </h3>
                     <p
                       style={{
@@ -323,7 +329,7 @@ export default function Screenshots() {
                         marginBottom: "1rem",
                       }}
                     >
-                      {screens[active].desc}
+                      {localizedScreens[active].desc}
                     </p>
                     <p
                       style={{
@@ -335,7 +341,7 @@ export default function Screenshots() {
                         paddingRight: "0.9rem",
                       }}
                     >
-                      {screens[active].value}
+                      {localizedScreens[active].value}
                     </p>
                     <div
                       className="mt-5 h-[2px] rounded-full"
@@ -365,10 +371,10 @@ export default function Screenshots() {
                 <div className="flex justify-center" style={{ gridColumn: 1, perspective: 1600 }}>
                   <motion.div
                     key={`left-${active}`}
-                    initial={{ opacity: 0, y: -26, rotateX: -86, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-                    transition={{ duration: 0.58, ease }}
-                    dir="rtl"
+                    initial={{ opacity: 0, y: -44, rotateX: -88, scale: 0.92, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.72, ease }}
+                    dir={dir}
                     className="w-full rounded-xl px-7 py-6"
                     style={{
                       background: "transparent",
@@ -391,7 +397,7 @@ export default function Screenshots() {
                         marginBottom: "0.75rem",
                       }}
                     >
-                      {screens[active].title}
+                      {localizedScreens[active].title}
                     </h3>
                     <p
                       style={{
@@ -401,7 +407,7 @@ export default function Screenshots() {
                         lineHeight: 1.82,
                       }}
                     >
-                      {screens[active].desc}
+                      {localizedScreens[active].desc}
                     </p>
                     <div className="mt-5 h-[2px] rounded-full" style={{ width: 42, background: "#B86C46" }} />
                   </motion.div>
@@ -410,19 +416,29 @@ export default function Screenshots() {
                 {/* Center phone */}
                 <div style={{ gridColumn: 2, width: 390, justifySelf: "center", paddingTop: 72 }}>
                   <motion.div
-                    initial={{ opacity: 0, y: 14, scale: 1 }}
-                    animate={{ opacity: 1, y: 0, scale: phoneScale }}
+                    initial={{
+                      opacity: 0,
+                      y: 42,
+                      scale: 0.94,
+                      filter: "blur(10px) drop-shadow(0 36px 56px rgba(124,61,42,0.17))",
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: phoneScale,
+                      filter: "blur(0px) drop-shadow(0 36px 56px rgba(124,61,42,0.17))",
+                    }}
                     transition={{
-                      opacity: { duration: 0.32, ease },
-                      y: { duration: 0.45, ease },
+                      opacity: { duration: 0.46, ease },
+                      y: { duration: 0.62, ease },
                       scale: { duration: 0.62, ease },
+                      filter: { duration: 0.5, ease },
                     }}
                     style={{
-                      filter: "drop-shadow(0 36px 56px rgba(124,61,42,0.17))",
                       transformOrigin: "center center",
                     }}
                   >
-                    <IPhone src={screens[active].src} />
+                    <IPhone src={localizedScreens[active].src} />
                   </motion.div>
                 </div>
 
@@ -430,10 +446,10 @@ export default function Screenshots() {
                 <div className="flex justify-center" style={{ gridColumn: 3, perspective: 1600 }}>
                   <motion.div
                     key={`right-${active}`}
-                    initial={{ opacity: 0, y: -26, rotateX: -86, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-                    transition={{ duration: 0.58, ease }}
-                    dir="rtl"
+                    initial={{ opacity: 0, y: -44, rotateX: -88, scale: 0.92, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.72, ease }}
+                    dir={dir}
                     className="w-full rounded-xl px-7 py-6"
                     style={{
                       background: "transparent",
@@ -456,7 +472,7 @@ export default function Screenshots() {
                         letterSpacing: "0.02em",
                       }}
                     >
-                      ماذا تستفيد؟
+                      {t.screenshots.benefitLabel}
                     </div>
                     <p
                       style={{
@@ -467,7 +483,7 @@ export default function Screenshots() {
                         marginBottom: "1.1rem",
                       }}
                     >
-                      {screens[active].value}
+                      {localizedScreens[active].value}
                     </p>
                     <div
                       className="h-[2px] rounded-full"
@@ -481,7 +497,7 @@ export default function Screenshots() {
 
           {/* Shared scroll steps — drive active index for both tablet and desktop */}
           <div style={{ position: "relative", zIndex: 1 }} aria-hidden="true">
-            {screens.map((screen, i) => (
+            {localizedScreens.map((screen, i) => (
               <div
                 key={`step-${screen.title}`}
                 ref={(el) => { stepRefs.current[i] = el; }}
@@ -493,14 +509,14 @@ export default function Screenshots() {
         </div>
 
         {/* ── Mobile only: static stacked cards (< md) ── */}
-        <div className="md:hidden space-y-16 pb-24" dir="rtl">
-          {screens.map((screen, i) => (
+        <div className="md:hidden space-y-16 pb-24" dir={dir}>
+          {localizedScreens.map((screen, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, ease }}
+              initial={{ opacity: 0, y: 86, scale: 0.9, rotate: -2, filter: "blur(14px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0, filter: "blur(0px)" }}
+              viewport={{ once: false, margin: "-60px" }}
+              transition={{ duration: 0.88, ease }}
               className="flex flex-col items-center gap-8"
             >
               <div

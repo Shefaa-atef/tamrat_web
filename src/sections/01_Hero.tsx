@@ -1,10 +1,15 @@
 ﻿import Lottie from "lottie-react";
-import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { motion, useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import logoAnimation from "../../assets/tamrat.json";
+import { useLanguage } from "@/lib/i18n";
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement | null>(null);
   const [canAnimate, setCanAnimate] = useState(false);
+  const isHeroInView = useInView(heroRef, { amount: 0.18 });
+  const heroIsActive = canAnimate && isHeroInView;
+  const { t } = useLanguage();
 
   useEffect(() => {
     let timerId: number | undefined;
@@ -28,7 +33,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden md:min-h-screen"
+    <section ref={heroRef} id="hero" className="relative min-h-[100svh] w-full overflow-hidden md:min-h-screen"
       style={{ background: 'linear-gradient(160deg, #FEF8EE 0%, #FAF0E0 45%, #F5E8D4 100%)' }}
     >
       {/* Dot grid texture */}
@@ -61,28 +66,45 @@ export default function Hero() {
         <div className="flex w-full max-w-[1200px] flex-col items-center justify-center pt-6 text-center sm:pt-0 sm:-translate-y-[4vh] md:-translate-y-[8vh]">
           <motion.div
             className="pointer-events-none mb-[-4.25rem] sm:mb-[-3.75rem] md:mb-[-3.5rem]"
-            initial={{ opacity: 0, y: 22, scale: 0.9, filter: "blur(10px)" }}
+            initial={{
+              opacity: 0,
+              y: 58,
+              scale: 0.82,
+              rotate: -3,
+              filter: "blur(18px) drop-shadow(0 18px 34px rgba(124, 61, 42, 0.12))",
+            }}
             animate={
-              canAnimate
-                ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
-                : { opacity: 0, y: 22, scale: 0.9, filter: "blur(10px)" }
+              heroIsActive
+                ? {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    rotate: 0,
+                    filter: "blur(0px) drop-shadow(0 18px 34px rgba(124, 61, 42, 0.12))",
+                  }
+                : {
+                    opacity: 0,
+                    y: 58,
+                    scale: 0.82,
+                    rotate: -3,
+                    filter: "blur(18px) drop-shadow(0 18px 34px rgba(124, 61, 42, 0.12))",
+                  }
             }
             transition={{
-              duration: 0.85,
+              duration: 1.05,
               ease: [0.22, 1, 0.36, 1],
             }}
             style={{
               width: "clamp(280px, 92vw, 1080px)",
               maxWidth: "100%",
-              filter: "drop-shadow(0 18px 34px rgba(124, 61, 42, 0.12))",
             }}
           >
             <div style={{ overflow: "hidden" }}>
               <Lottie
-                key={canAnimate ? "hero-lottie-play" : "hero-lottie-idle"}
+                key={heroIsActive ? "hero-lottie-play" : "hero-lottie-idle"}
                 animationData={logoAnimation}
                 loop={false}
-                autoplay={canAnimate}
+                autoplay={heroIsActive}
                 style={{ display: "block", marginTop: "-2%", marginBottom: "-12%" }}
               />
             </div>
@@ -90,15 +112,15 @@ export default function Hero() {
 
           <motion.p
             className="font-heading mt-0 max-w-[18ch] sm:max-w-none px-2 sm:px-0"
-            initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
+            initial={{ opacity: 0, y: 36, scale: 0.96, filter: "blur(12px)" }}
             animate={
-              canAnimate
-                ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                : { opacity: 0, y: 14, filter: "blur(8px)" }
+              heroIsActive
+                ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
+                : { opacity: 0, y: 36, scale: 0.96, filter: "blur(12px)" }
             }
             transition={{
-              duration: 0.8,
-              delay: 0.52,
+              duration: 0.9,
+              delay: 0.42,
               ease: [0.22, 1, 0.36, 1],
             }}
             style={{
@@ -111,7 +133,7 @@ export default function Hero() {
               textShadow: "0 8px 20px rgba(124, 61, 42, 0.12)",
             }}
           >
-            رفيقك الذكي لصيامٍ أسهل وثباتٍ أجمل
+            {t.hero.tagline}
           </motion.p>
         </div>
       </div>

@@ -2,18 +2,20 @@ import { motion } from "motion/react";
 import { Calendar, Sparkles, BookOpen } from "lucide-react";
 import iphoneFrame from "../../assets/644645cfb354cb60be6900a5_iPhone14-space-black.svg";
 import planScreenshot from "../../assets/light_theme_app/plan_page.png";
+import { useLanguage } from "@/lib/i18n";
 
-const features = [
-  { icon: Calendar, label: "تخطيط ذكي", desc: "اقتراحات مخصصة لأفضل أيام الصيام" },
-  { icon: Sparkles, label: "متابعة سهلة", desc: "تتبع تقدمك وإنجازاتك بوضوح" },
-  { icon: BookOpen, label: "تقويم هجري", desc: "تذكيرات دقيقة بالمناسبات الدينية" },
-];
-
-const headlineText = "رفيقك الذكي في رحلة الصيام";
 const ease = [0.22, 1, 0.36, 1] as const;
 const spring = { type: "spring", stiffness: 55, damping: 16 } as const;
+const featureIcons = [Calendar, Sparkles, BookOpen] as const;
 
 export default function ValueProp() {
+  const { dir, isArabic, t } = useLanguage();
+  const content = t.valueProp;
+  const features = content.features.map((feature, index) => ({
+    ...feature,
+    icon: featureIcons[index],
+  }));
+
   return (
     <section
       id="what"
@@ -58,14 +60,14 @@ export default function ValueProp() {
       >
 
         {/* TEXT */}
-        <div className="order-2 md:order-1" dir="rtl" style={{ width: "100%", maxWidth: 760, justifySelf: "center" }}>
+        <div className="order-2 md:order-1" dir={dir} style={{ width: "100%", maxWidth: 760, justifySelf: "center" }}>
 
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, ease }}
+            initial={{ opacity: 0, y: 34, scale: 0.92, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.72, ease }}
             style={{ marginBottom: 24 }}
           >
             <span
@@ -76,17 +78,17 @@ export default function ValueProp() {
                 padding: "8px 18px",
               }}
             >
-              ما هو تطبيق تمرات؟
+              {content.badge}
             </span>
           </motion.div>
 
           {/* Headline */}
           <motion.h2
-            className="font-heading md:whitespace-nowrap"
-            initial={{ opacity: 0, y: 34, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.12, ease }}
+            className={isArabic ? "font-heading md:whitespace-nowrap" : "font-heading"}
+            initial={{ opacity: 0, y: 72, scale: 0.94, filter: "blur(18px)" }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.95, delay: 0.08, ease }}
             style={{
               fontSize: "clamp(1.9rem, 3.35vw, 3.35rem)",
               fontWeight: 700,
@@ -95,15 +97,15 @@ export default function ValueProp() {
               marginBottom: 20,
             }}
           >
-            {headlineText}
+            {content.headline}
           </motion.h2>
 
           {/* Sub-copy */}
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.5, ease }}
+            initial={{ opacity: 0, y: 48, scale: 0.98, filter: "blur(12px)" }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.86, delay: 0.28, ease }}
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "clamp(0.95rem, 1.4vw, 1.1rem)",
@@ -112,8 +114,7 @@ export default function ValueProp() {
               marginBottom: 40,
             }}
           >
-            تطبيق مصمم بعناية لصيام القضاء والنوافل — نظّم أيامك، تابع
-            تقدمك، وابقَ على المسار بهدوء تام.
+            {content.body}
           </motion.p>
 
           {/* Feature strips */}
@@ -121,10 +122,10 @@ export default function ValueProp() {
             {features.map(({ icon: Icon, label, desc }, i) => (
               <motion.div
                 key={label}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: 0.55 + i * 0.1, ease }}
+                initial={{ opacity: 0, x: 58, y: 10, scale: 0.95, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, x: 0, y: 0, scale: 1, filter: "blur(0px)" }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.72, delay: 0.38 + i * 0.12, ease }}
                 className="group"
                 style={{
                   display: "flex",
@@ -176,7 +177,7 @@ export default function ValueProp() {
                   className="group-hover:opacity-100"
                   style={{ flexShrink: 0, color: "#C17124", fontSize: "1rem", opacity: 0, transition: "opacity 0.25s" }}
                 >
-                  ←
+                  {content.arrow}
                 </span>
               </motion.div>
             ))}
@@ -185,10 +186,10 @@ export default function ValueProp() {
 
         {/* PHONE */}
         <motion.div
-          initial={{ opacity: 0, y: 60, scale: 0.88 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ ...spring, delay: 0.08 }}
+          initial={{ opacity: 0, y: 120, scale: 0.78, rotate: -4, filter: "blur(16px)" }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0, filter: "blur(0px)" }}
+          viewport={{ once: false }}
+          transition={{ ...spring, delay: 0.04 }}
           className="order-1 md:order-2"
           style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
         >
@@ -232,7 +233,7 @@ export default function ValueProp() {
                 />
                 <img
                   src={planScreenshot}
-                  alt="شاشة الخطة في تمرات"
+                  alt={content.phoneAlt}
                   style={{
                     position: "absolute",
                     width: "100%",
