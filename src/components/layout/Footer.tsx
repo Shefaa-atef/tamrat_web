@@ -106,7 +106,9 @@ export default function Footer() {
           </a>
 
           <a
-            href={`mailto:${APP_LINKS.supportEmail}`}
+            href={APP_LINKS.contactEmail}
+            target="_blank"
+            rel="noreferrer"
             style={{
               alignItems: "center",
               background: "#FFFFFF",

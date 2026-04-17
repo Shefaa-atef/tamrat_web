@@ -5,6 +5,8 @@ export const APP_LINKS = {
   privacyPolicy: "#/privacy-policy",
   accountDeletion: "#/privacy-policy",
   supportEmail: "tamrat.application@gmail.com",
+  contactEmail:
+    "https://mail.google.com/mail/?view=cm&fs=1&to=tamrat.application%40gmail.com",
   instagram: "#",
   twitter: "#",
 };

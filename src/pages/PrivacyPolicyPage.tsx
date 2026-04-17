@@ -80,7 +80,7 @@ const deleteSubject = encodeURIComponent("حذف حساب تمرات");
 const deleteBody = encodeURIComponent(
   "السلام عليكم فريق تمرات،\n\nأرغب بحذف حسابي في تمرات والبيانات المتزامنة المرتبطة به.\n\nالبريد المسجل في الحساب:\nسبب الطلب، اختياري:\n\nشكرا لكم."
 );
-const deletionMailto = `mailto:${APP_LINKS.supportEmail}?subject=${deleteSubject}&body=${deleteBody}`;
+const deletionEmailUrl = `${APP_LINKS.contactEmail}&su=${deleteSubject}&body=${deleteBody}`;
 
 function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
   const Icon = row.icon;
@@ -214,7 +214,9 @@ function SidePanel() {
       </div>
 
       <a
-        href={`mailto:${APP_LINKS.supportEmail}`}
+        href={APP_LINKS.contactEmail}
+        target="_blank"
+        rel="noreferrer"
         style={{
           background: "#FFFFFF",
           border: "1px solid #E8D8C7",
@@ -446,7 +448,9 @@ export default function PrivacyPolicyPage() {
                   }}
                 >
                   <a
-                    href={deletionMailto}
+                    href={deletionEmailUrl}
+                    target="_blank"
+                    rel="noreferrer"
                     style={{
                       alignItems: "center",
                       background: "#7C3D2A",
@@ -465,7 +469,9 @@ export default function PrivacyPolicyPage() {
                     طلب حذف الحساب
                   </a>
                   <a
-                    href={`mailto:${APP_LINKS.supportEmail}`}
+                    href={APP_LINKS.contactEmail}
+                    target="_blank"
+                    rel="noreferrer"
                     style={{
                       alignItems: "center",
                       background: "#FFFFFF",
