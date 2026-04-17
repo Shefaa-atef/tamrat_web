@@ -126,18 +126,41 @@ function IPhone({ src }: { src: string }) {
 
 // ─── Section ──────────────────────────────────────────────────────────────────
 export default function Screenshots() {
-  const { dir, t } = useLanguage();
+  const { dir, language, t } = useLanguage();
   const localizedScreens = t.screenshots.screens.map((screen, index) => ({
     ...screen,
     src: screens[index]?.src ?? scrCalendar,
   }));
+  const screenCount = localizedScreens.length;
   const [active, setActive] = useState(0);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const activeProgress = localizedScreens.length > 1 ? active / (localizedScreens.length - 1) : 0;
+  const activeProgress = screenCount > 1 ? active / (screenCount - 1) : 0;
   const phoneScale = 1 + activeProgress * 0.22;
 
   // Desktop sticky viewport is driven by hidden scroll steps.
   useEffect(() => {
+    let syncFrame = 0;
+
+    const syncActiveFromScroll = () => {
+      const viewportCenter = window.innerHeight / 2;
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      stepRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const stepCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(stepCenter - viewportCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      setActive(closestIndex);
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -158,10 +181,13 @@ export default function Screenshots() {
       if (el) observer.observe(el);
     });
 
+    syncFrame = window.requestAnimationFrame(syncActiveFromScroll);
+
     return () => {
+      if (syncFrame) window.cancelAnimationFrame(syncFrame);
       observer.disconnect();
     };
-  }, []);
+  }, [dir, screenCount]);
 
   return (
     <section
@@ -291,7 +317,7 @@ export default function Screenshots() {
                 {/* Text — visual left in RTL flex */}
                 <div style={{ flex: 1, perspective: 1600 }}>
                   <motion.div
-                    key={`tablet-text-${active}`}
+                    key={`tablet-text-${language}-${active}`}
                     initial={{ opacity: 0, y: -44, rotateX: -88, scale: 0.92, filter: "blur(8px)" }}
                     animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1, filter: "blur(0px)" }}
                     transition={{ duration: 0.72, ease }}
@@ -370,7 +396,7 @@ export default function Screenshots() {
                 {/* Left screen details panel */}
                 <div className="flex justify-center" style={{ gridColumn: 1, perspective: 1600 }}>
                   <motion.div
-                    key={`left-${active}`}
+                    key={`left-${language}-${active}`}
                     initial={{ opacity: 0, y: -44, rotateX: -88, scale: 0.92, filter: "blur(8px)" }}
                     animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1, filter: "blur(0px)" }}
                     transition={{ duration: 0.72, ease }}
@@ -445,7 +471,7 @@ export default function Screenshots() {
                 {/* Right benefit panel */}
                 <div className="flex justify-center" style={{ gridColumn: 3, perspective: 1600 }}>
                   <motion.div
-                    key={`right-${active}`}
+                    key={`right-${language}-${active}`}
                     initial={{ opacity: 0, y: -44, rotateX: -88, scale: 0.92, filter: "blur(8px)" }}
                     animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1, filter: "blur(0px)" }}
                     transition={{ duration: 0.72, ease }}
@@ -499,7 +525,7 @@ export default function Screenshots() {
           <div style={{ position: "relative", zIndex: 1 }} aria-hidden="true">
             {localizedScreens.map((screen, i) => (
               <div
-                key={`step-${screen.title}`}
+                key={`step-${screen.src}`}
                 ref={(el) => { stepRefs.current[i] = el; }}
                 data-index={i}
                 style={{ height: "88vh" }}
