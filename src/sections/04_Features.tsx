@@ -141,7 +141,7 @@ export default function Features() {
             مميزات تمرات
           </span>
           <h2
-            className="font-heading text-[1.85rem] sm:text-[2.25rem] md:whitespace-nowrap md:text-[3.25rem]"
+            className="font-heading text-[1.85rem] sm:text-[2.25rem] 2xl:text-[3.25rem]"
             style={{
               color: "#1C0D04",
               fontWeight: 700,
@@ -152,7 +152,7 @@ export default function Features() {
             مزايا واضحة تساعدك على الاستمرار
           </h2>
           <p
-            className="mt-4 hidden md:block"
+            className="mt-4 hidden 2xl:block"
             style={{
               color: "#8B6E52",
               fontFamily: "var(--font-body)",
@@ -167,7 +167,7 @@ export default function Features() {
           </p>
         </motion.div>
 
-        <div className="hidden md:block" style={{ width: "100%", maxWidth: 1600, margin: "0 auto", paddingInline: "clamp(18px, 4vw, 56px)" }}>
+        <div className="hidden 2xl:block" style={{ width: "100%", maxWidth: 1600, margin: "0 auto", paddingInline: "clamp(18px, 4vw, 56px)" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -198,7 +198,7 @@ export default function Features() {
               />
 
               <div
-                className="grid items-center gap-4 md:grid-cols-[minmax(240px,1fr)_minmax(720px,1.45fr)_minmax(240px,1fr)] md:gap-6"
+                className="grid items-center gap-4 grid-cols-[minmax(240px,1fr)_minmax(720px,1.45fr)_minmax(240px,1fr)] gap-6"
                 style={{ position: "relative", zIndex: 1 }}
               >
                 {slides.map(({ feature, position }) => {
@@ -366,17 +366,12 @@ export default function Features() {
         </div>
 
         <motion.div
-          className="md:hidden"
+          className="2xl:hidden w-full mx-auto md:max-w-[700px]"
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.55, ease }}
-          style={{
-            width: "100%",
-            maxWidth: 420,
-            margin: "0 auto",
-            paddingInline: 18,
-          }}
+          style={{ paddingInline: "clamp(18px, 4vw, 40px)", margin: "0 auto" }}
         >
           <motion.article
             key={activeFeature.id}
@@ -385,10 +380,10 @@ export default function Features() {
             transition={{ duration: 0.26, ease }}
             style={{
               border: "1px solid #E7D7C5",
-              borderRadius: 8,
+              borderRadius: 16,
               background: "#FFFFFF",
               boxShadow: "0 18px 40px rgba(46,25,13,0.10)",
-              padding: "22px 18px 18px",
+              padding: "clamp(22px, 3.5vw, 44px) clamp(18px, 3.5vw, 44px)",
               textAlign: "right",
             }}
           >
@@ -398,21 +393,15 @@ export default function Features() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 gap: 12,
-                marginBottom: 18,
+                marginBottom: 22,
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                }}
-              >
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <div
                   style={{
-                    width: 42,
-                    height: 42,
-                    borderRadius: 8,
+                    width: 48,
+                    height: 48,
+                    borderRadius: 12,
                     background: "#7C3D2A",
                     color: "#FFFFFF",
                     display: "flex",
@@ -421,13 +410,13 @@ export default function Features() {
                     boxShadow: "0 8px 18px rgba(124,61,42,0.18)",
                   }}
                 >
-                  <ActiveIcon size={19} strokeWidth={1.9} />
+                  <ActiveIcon size={21} strokeWidth={1.9} />
                 </div>
                 <span
                   style={{
                     color: "#8A6046",
                     fontFamily: "var(--font-heading)",
-                    fontSize: "0.82rem",
+                    fontSize: "0.85rem",
                     fontWeight: 700,
                   }}
                 >
@@ -440,10 +429,10 @@ export default function Features() {
               style={{
                 color: "#8A6046",
                 fontFamily: "var(--font-heading)",
-                fontSize: "0.9rem",
+                fontSize: "clamp(0.9rem, 1.4vw, 1rem)",
                 fontWeight: 700,
                 lineHeight: 1.7,
-                margin: "0 0 8px",
+                margin: "0 0 10px",
               }}
             >
               {activeFeature.short}
@@ -453,36 +442,42 @@ export default function Features() {
               style={{
                 color: "#1F0E06",
                 fontFamily: "var(--font-heading)",
-                fontSize: "1.35rem",
+                fontSize: "clamp(1.35rem, 2.8vw, 1.9rem)",
                 fontWeight: 800,
-                lineHeight: 1.45,
-                margin: 0,
+                lineHeight: 1.35,
+                margin: "0 0 16px",
               }}
             >
               {activeFeature.title}
             </h3>
 
-            <div
+            <p
               style={{
-                display: "grid",
-                gap: 8,
-                marginTop: 18,
+                fontFamily: "var(--font-body)",
+                fontSize: "clamp(0.88rem, 1.3vw, 1rem)",
+                color: "#7A5A42",
+                lineHeight: 1.8,
+                marginBottom: 20,
               }}
             >
-              {activeFeature.pillars.slice(0, 2).map((pillar) => (
+              {activeFeature.summary}
+            </p>
+
+            <div style={{ display: "grid", gap: 10 }}>
+              {activeFeature.pillars.map((pillar) => (
                 <div
                   key={pillar}
                   style={{
                     display: "flex",
                     alignItems: "flex-start",
-                    gap: 10,
+                    gap: 12,
                     border: "1px solid #EADACA",
-                    borderRadius: 8,
+                    borderRadius: 10,
                     background: "#FFFCF8",
-                    padding: "10px 12px",
+                    padding: "clamp(10px, 1.5vw, 16px) clamp(12px, 2vw, 20px)",
                     color: "#5F3F2D",
                     fontFamily: "var(--font-body)",
-                    fontSize: "0.86rem",
+                    fontSize: "clamp(0.86rem, 1.2vw, 0.97rem)",
                     lineHeight: 1.65,
                   }}
                 >

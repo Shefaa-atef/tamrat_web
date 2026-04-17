@@ -166,8 +166,8 @@ export default function Screenshots() {
         width: "100%",
         paddingTop: 120,
         paddingBottom: 120,
-        paddingLeft: 80,
-        paddingRight: 80,
+        paddingLeft: "clamp(18px, 5.5vw, 80px)",
+        paddingRight: "clamp(18px, 5.5vw, 80px)",
       }}
     >
       {/* Top melt from white */}
@@ -221,7 +221,7 @@ export default function Screenshots() {
             </span>
 
             <h2
-              className="font-heading md:whitespace-nowrap"
+              className="font-heading 2xl:whitespace-nowrap"
               style={{
                 fontWeight: 700,
                 fontSize: "clamp(2.1rem, 3.8vw, 3.25rem)",
@@ -245,7 +245,7 @@ export default function Screenshots() {
           </div>
         </motion.div>
 
-        {/* ── Desktop: pinned sequence, centered phone ── */}
+        {/* ── Tablet + Desktop: sticky scroll animation (md+) ── */}
         <div className="hidden md:block" style={{ marginTop: 12, position: "relative" }}>
           <div
             style={{
@@ -258,14 +258,98 @@ export default function Screenshots() {
               zIndex: 2,
             }}
           >
+            {/* ── Tablet viewport: 2-col, phone right / text left (md to 2xl) ── */}
             <div
-              className="relative"
-              style={{
-                width: "100%",
-                maxWidth: 1220,
-                margin: "0 auto",
-                minHeight: 620,
-              }}
+              className="2xl:hidden w-full"
+              style={{ maxWidth: 900, margin: "0 auto" }}
+            >
+              <div
+                className="flex items-center gap-14"
+                dir="rtl"
+                style={{ width: "100%" }}
+              >
+                {/* Phone — visual right in RTL flex */}
+                <div style={{ width: 260, flexShrink: 0 }}>
+                  <motion.div
+                    animate={{ scale: phoneScale }}
+                    transition={{ scale: { duration: 0.62, ease } }}
+                    style={{
+                      filter: "drop-shadow(0 28px 44px rgba(124,61,42,0.17))",
+                      transformOrigin: "center center",
+                    }}
+                  >
+                    <IPhone src={screens[active].src} />
+                  </motion.div>
+                </div>
+
+                {/* Text — visual left in RTL flex */}
+                <div style={{ flex: 1, perspective: 1600 }}>
+                  <motion.div
+                    key={`tablet-text-${active}`}
+                    initial={{ opacity: 0, y: -26, rotateX: -86, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                    transition={{ duration: 0.58, ease }}
+                    dir="rtl"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transformOrigin: "center top",
+                      backfaceVisibility: "hidden",
+                    }}
+                  >
+                    <div
+                      className="mb-4 font-heading text-xs font-semibold tracking-[0.25em]"
+                      style={{ color: "#B88C68" }}
+                    >
+                      {String(active + 1).padStart(2, "0")}
+                    </div>
+                    <h3
+                      className="font-heading"
+                      style={{
+                        fontWeight: 700,
+                        fontSize: "clamp(1.35rem, 2vw, 1.75rem)",
+                        color: "#1C0D04",
+                        lineHeight: 1.3,
+                        marginBottom: "0.75rem",
+                      }}
+                    >
+                      {screens[active].title}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: "0.98rem",
+                        color: "#7D6149",
+                        lineHeight: 1.82,
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      {screens[active].desc}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: "0.92rem",
+                        color: "#7C3D2A",
+                        lineHeight: 1.75,
+                        borderRight: "3px solid #B86C46",
+                        paddingRight: "0.9rem",
+                      }}
+                    >
+                      {screens[active].value}
+                    </p>
+                    <div
+                      className="mt-5 h-[2px] rounded-full"
+                      style={{ width: 42, background: "#B86C46" }}
+                    />
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Desktop viewport: original 3-col (2xl+) ── */}
+            <div
+              className="hidden 2xl:block relative w-full"
+              style={{ maxWidth: 1220, margin: "0 auto", minHeight: 620 }}
             >
               <div
                 className="grid items-center"
@@ -374,7 +458,6 @@ export default function Screenshots() {
                     >
                       ماذا تستفيد؟
                     </div>
-
                     <p
                       style={{
                         fontFamily: "var(--font-body)",
@@ -386,13 +469,9 @@ export default function Screenshots() {
                     >
                       {screens[active].value}
                     </p>
-
                     <div
                       className="h-[2px] rounded-full"
-                      style={{
-                        width: 56,
-                        background: "#B86C46",
-                      }}
+                      style={{ width: 56, background: "#B86C46" }}
                     />
                   </motion.div>
                 </div>
@@ -400,13 +479,12 @@ export default function Screenshots() {
             </div>
           </div>
 
+          {/* Shared scroll steps — drive active index for both tablet and desktop */}
           <div style={{ position: "relative", zIndex: 1 }} aria-hidden="true">
             {screens.map((screen, i) => (
               <div
-                key={`desktop-step-${screen.title}`}
-                ref={(el) => {
-                  stepRefs.current[i] = el;
-                }}
+                key={`step-${screen.title}`}
+                ref={(el) => { stepRefs.current[i] = el; }}
                 data-index={i}
                 style={{ height: "88vh" }}
               />
@@ -414,8 +492,8 @@ export default function Screenshots() {
           </div>
         </div>
 
-        {/* ── Mobile: vertical cards ── */}
-        <div className="md:hidden space-y-24 pb-24" dir="rtl">
+        {/* ── Mobile only: static stacked cards (< md) ── */}
+        <div className="md:hidden space-y-16 pb-24" dir="rtl">
           {screens.map((screen, i) => (
             <motion.div
               key={i}
@@ -425,15 +503,12 @@ export default function Screenshots() {
               transition={{ duration: 0.7, ease }}
               className="flex flex-col items-center gap-8"
             >
-              {/* Phone */}
               <div
                 className="w-[200px]"
                 style={{ filter: "drop-shadow(0 24px 36px rgba(124,61,42,0.14))" }}
               >
                 <IPhone src={screen.src} />
               </div>
-
-              {/* Text */}
               <div className="text-center w-full">
                 <div
                   className="mb-3 font-heading text-xs font-semibold tracking-widest"
