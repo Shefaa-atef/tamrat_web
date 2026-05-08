@@ -88,7 +88,7 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
         display: "grid",
         gap: 16,
         gridTemplateColumns: "48px minmax(0, 1fr)",
-        padding: "22px",
+        padding: "clamp(16px, 4vw, 22px)",
       }}
       className="max-sm:grid-cols-1"
     >
@@ -147,7 +147,7 @@ function SidePanel() {
         gap: 14,
         alignSelf: "start",
       }}
-      className="lg:sticky lg:top-24"
+      className="md:sticky md:top-24"
     >
       <div
         style={{
@@ -155,7 +155,7 @@ function SidePanel() {
           borderRadius: 8,
           boxShadow: "0 20px 46px rgba(46,25,13,0.16)",
           color: "#FFF8EF",
-          padding: 22,
+          padding: "clamp(16px, 4vw, 22px)",
         }}
       >
         <CalendarHeart
@@ -216,7 +216,7 @@ function SidePanel() {
           color: "#1C0D04",
           display: "grid",
           gap: 8,
-          padding: 20,
+          padding: "clamp(16px, 4vw, 20px)",
           textDecoration: "none",
         }}
       >
@@ -265,7 +265,7 @@ export default function PrivacyPolicyPage() {
         background:
           "linear-gradient(180deg, #FEF8EE 0%, #FFFFFF 32%, #FFF8EF 100%)",
         minHeight: "100vh",
-        padding: "112px clamp(20px, 5vw, 80px) 84px",
+        padding: "clamp(80px, 10vw, 112px) clamp(16px, 4vw, 80px) clamp(60px, 8vw, 84px)",
       }}
     >
       <section style={{ margin: "0 auto", maxWidth: 1180 }}>
@@ -276,7 +276,7 @@ export default function PrivacyPolicyPage() {
           style={{
             alignItems: "center",
             display: "grid",
-            gap: 32,
+            gap: "clamp(16px, 5vw, 32px)",
             gridTemplateColumns: "minmax(0, 1fr) auto",
             marginBottom: 32,
           }}
@@ -290,7 +290,7 @@ export default function PrivacyPolicyPage() {
                 color: "#7C3D2A",
                 display: "inline-flex",
                 fontFamily: "var(--font-heading)",
-                fontSize: "0.9rem",
+                fontSize: "clamp(0.8rem, 2vw, 0.9rem)",
                 fontWeight: 800,
                 gap: 8,
                 marginBottom: 24,
@@ -309,9 +309,9 @@ export default function PrivacyPolicyPage() {
                 color: "#7C3D2A",
                 display: "inline-flex",
                 fontFamily: "var(--font-heading)",
-                fontSize: "0.88rem",
+                fontSize: "clamp(0.75rem, 2vw, 0.88rem)",
                 fontWeight: 800,
-                padding: "8px 15px",
+                padding: "clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 15px)",
               }}
             >
               {t.privacy.updated}
@@ -351,9 +351,9 @@ export default function PrivacyPolicyPage() {
               borderRadius: 8,
               boxShadow: "0 18px 42px rgba(46,25,13,0.08)",
               display: "flex",
-              height: 116,
+              height: "clamp(80px, 15vw, 116px)",
               justifyContent: "center",
-              width: 116,
+              width: "clamp(80px, 15vw, 116px)",
             }}
           >
             <img
@@ -361,9 +361,9 @@ export default function PrivacyPolicyPage() {
               alt={t.common.logoAlt}
               style={{
                 filter: "drop-shadow(0 12px 24px rgba(124,61,42,0.12))",
-                height: 78,
+                height: "clamp(60px, 10vw, 78px)",
                 objectFit: "contain",
-                width: 78,
+                width: "clamp(60px, 10vw, 78px)",
               }}
             />
           </div>
@@ -373,9 +373,9 @@ export default function PrivacyPolicyPage() {
           style={{
             display: "grid",
             gap: 22,
-            gridTemplateColumns: "minmax(0, 1fr) 320px",
+            gridTemplateColumns: "minmax(0, 1fr) clamp(280px, 30vw, 320px)",
           }}
-          className="max-lg:grid-cols-1"
+          className="max-md:grid-cols-1"
         >
           <div style={{ display: "grid", gap: 14 }}>
             {localizedPolicyRows.map((row, index) => (
@@ -396,7 +396,7 @@ export default function PrivacyPolicyPage() {
                 display: "grid",
                 gap: 18,
                 gridTemplateColumns: "54px minmax(0, 1fr)",
-                padding: "26px 24px",
+                padding: "clamp(16px, 4vw, 26px) clamp(16px, 4vw, 24px)",
               }}
               className="max-sm:grid-cols-1"
             >
