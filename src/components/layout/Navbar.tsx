@@ -52,14 +52,14 @@ export default function Navbar() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: "12px clamp(12px, 3vw, 40px)",
+              padding: "8px clamp(8px, 2vw, 40px)",
             }}
           >
             <a href="#hero" aria-label={t.common.logoAlt}>
               <img
                 src={logoUrl}
                 alt={t.common.logoAlt}
-                style={{ width: "clamp(36px, 8vw, 44px)", height: "clamp(36px, 8vw, 44px)", objectFit: "contain" }}
+                style={{ width: "clamp(32px, 7vw, 44px)", height: "clamp(32px, 7vw, 44px)", objectFit: "contain" }}
               />
             </a>
 
@@ -119,12 +119,12 @@ export default function Navbar() {
                   cursor: "pointer",
                   display: "inline-flex",
                   fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(11px, 2vw, 13px)",
+                  fontSize: "clamp(10px, 2vw, 13px)",
                   fontWeight: 800,
-                  height: "clamp(36px, 8vw, 44px)",
+                  height: "clamp(32px, 6.5vw, 44px)",
                   justifyContent: "center",
                   lineHeight: 1,
-                  width: "clamp(36px, 8vw, 44px)",
+                  width: "clamp(32px, 6.5vw, 44px)",
                 }}
               >
                 {t.common.languageButton}
@@ -232,7 +232,7 @@ export default function Navbar() {
                       fontSize: "clamp(13px, 3vw, 14px)",
                       color: "rgba(122,80,56,0.85)",
                       textDecoration: "none",
-                      padding: "clamp(10px, 2vw, 14px) clamp(12px, 3vw, 40px)",
+                      padding: "clamp(8px, 1.5vw, 14px) clamp(8px, 2vw, 40px)",
                       borderBottom: "1px solid rgba(193,113,36,0.08)",
                       transition: "background 0.15s",
                     }}

@@ -86,9 +86,9 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
         borderRadius: 8,
         boxShadow: "0 12px 28px rgba(46,25,13,0.06)",
         display: "grid",
-        gap: "clamp(12px, 2vw, 16px)",
-        gridTemplateColumns: "clamp(40px, 10vw, 48px) minmax(0, 1fr)",
-        padding: "clamp(14px, 3vw, 22px)",
+        gap: "clamp(10px, 2vw, 16px)",
+        gridTemplateColumns: "clamp(36px, 8vw, 48px) minmax(0, 1fr)",
+        padding: "clamp(12px, 2.5vw, 22px)",
       }}
       className="max-sm:grid-cols-1"
     >
@@ -100,13 +100,13 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
           borderRadius: 8,
           color: "#7C3D2A",
           display: "flex",
-          height: "clamp(40px, 10vw, 48px)",
+          height: "clamp(36px, 8vw, 48px)",
           justifyContent: "center",
-          width: "clamp(40px, 10vw, 48px)",
+          width: "clamp(36px, 8vw, 48px)",
           flexShrink: 0,
         }}
       >
-        <Icon size="clamp(18, 4vw, 21)" strokeWidth={1.85} />
+        <Icon size="clamp(16, 3.5vw, 21)" strokeWidth={1.85} />
       </div>
 
       <div>
@@ -114,10 +114,10 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
           style={{
             color: "#1C0D04",
             fontFamily: "var(--font-heading)",
-            fontSize: "clamp(1rem, 2.5vw, 1.16rem)",
+            fontSize: "clamp(0.9rem, 2.3vw, 1.16rem)",
             fontWeight: 800,
-            lineHeight: 1.45,
-            margin: "0 0 clamp(6px, 1vw, 8px)",
+            lineHeight: 1.4,
+            margin: "0 0 clamp(4px, 1vw, 8px)",
           }}
         >
           {row.title}
@@ -126,8 +126,8 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
           style={{
             color: "#6D4B34",
             fontFamily: "var(--font-body)",
-            fontSize: "clamp(0.85rem, 2vw, 0.96rem)",
-            lineHeight: 1.8,
+            fontSize: "clamp(0.8rem, 1.8vw, 0.96rem)",
+            lineHeight: 1.75,
             margin: 0,
           }}
         >
@@ -156,46 +156,46 @@ function SidePanel() {
           borderRadius: 8,
           boxShadow: "0 20px 46px rgba(46,25,13,0.16)",
           color: "#FFF8EF",
-          padding: "clamp(14px, 3vw, 22px)",
+          padding: "clamp(12px, 2.5vw, 22px)",
         }}
       >
         <CalendarHeart
-          size="clamp(20, 4vw, 24)"
+          size="clamp(18, 3.5vw, 24)"
           strokeWidth={1.8}
-          style={{ color: "#F4C97E", marginBottom: "clamp(10px, 2vw, 14px)" }}
+          style={{ color: "#F4C97E", marginBottom: "clamp(8px, 1.5vw, 14px)" }}
         />
         <h2
           style={{
             fontFamily: "var(--font-heading)",
-            fontSize: "clamp(1rem, 2.5vw, 1.18rem)",
+            fontSize: "clamp(0.95rem, 2.3vw, 1.18rem)",
             fontWeight: 800,
-            lineHeight: 1.45,
+            lineHeight: 1.4,
             margin: "0 0 clamp(6px, 1vw, 8px)",
           }}
         >
           {t.privacy.summaryTitle}
         </h2>
-        <div style={{ display: "grid", gap: "clamp(8px, 2vw, 10px)" }}>
+        <div style={{ display: "grid", gap: "clamp(7px, 1.5vw, 10px)" }}>
           {t.privacy.quickFacts.map((fact) => (
             <div
               key={fact}
               style={{
                 alignItems: "flex-start",
                 display: "flex",
-                gap: "clamp(7px, 1.5vw, 9px)",
+                gap: "clamp(6px, 1.2vw, 9px)",
               }}
             >
               <CheckCircle2
-                size="clamp(15, 3vw, 17)"
+                size="clamp(14, 2.5vw, 17)"
                 strokeWidth={2}
-                style={{ color: "#F4C97E", flexShrink: 0, marginTop: "clamp(2px, 0.5vw, 4px)" }}
+                style={{ color: "#F4C97E", flexShrink: 0, marginTop: "clamp(1px, 0.5vw, 4px)" }}
               />
               <span
                 style={{
                   color: "rgba(255,248,239,0.82)",
                   fontFamily: "var(--font-body)",
-                  fontSize: "clamp(0.8rem, 2vw, 0.92rem)",
-                  lineHeight: 1.7,
+                  fontSize: "clamp(0.75rem, 1.8vw, 0.92rem)",
+                  lineHeight: 1.65,
                 }}
               >
                 {fact}
@@ -395,9 +395,9 @@ export default function PrivacyPolicyPage() {
                 border: "1px solid #DFC6AF",
                 borderRadius: 8,
                 display: "grid",
-                gap: "clamp(14px, 2vw, 18px)",
-                gridTemplateColumns: "clamp(48px, 10vw, 54px) minmax(0, 1fr)",
-                padding: "clamp(14px, 3vw, 26px) clamp(14px, 3vw, 24px)",
+                gap: "clamp(12px, 2vw, 18px)",
+                gridTemplateColumns: "clamp(44px, 9vw, 54px) minmax(0, 1fr)",
+                padding: "clamp(12px, 2.5vw, 26px) clamp(12px, 2.5vw, 24px)",
               }}
               className="max-sm:grid-cols-1"
             >
@@ -408,13 +408,13 @@ export default function PrivacyPolicyPage() {
                   borderRadius: 8,
                   color: "#FFFFFF",
                   display: "flex",
-                  height: "clamp(48px, 10vw, 54px)",
+                  height: "clamp(44px, 9vw, 54px)",
                   justifyContent: "center",
-                  width: "clamp(48px, 10vw, 54px)",
+                  width: "clamp(44px, 9vw, 54px)",
                   flexShrink: 0,
                 }}
               >
-                <Trash2 size="clamp(20, 4vw, 23)" strokeWidth={1.85} />
+                <Trash2 size="clamp(18, 3.5vw, 23)" strokeWidth={1.85} />
               </div>
 
               <div>
@@ -422,10 +422,10 @@ export default function PrivacyPolicyPage() {
                   style={{
                     color: "#1C0D04",
                     fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(1.1rem, 2.5vw, 2rem)",
+                    fontSize: "clamp(0.95rem, 2.3vw, 2rem)",
                     fontWeight: 900,
-                    lineHeight: 1.35,
-                    margin: "0 0 clamp(8px, 1.5vw, 10px)",
+                    lineHeight: 1.3,
+                    margin: "0 0 clamp(6px, 1.5vw, 10px)",
                   }}
                 >
                   {t.privacy.accountDeletionTitle}
@@ -434,9 +434,9 @@ export default function PrivacyPolicyPage() {
                   style={{
                     color: "#6D4B34",
                     fontFamily: "var(--font-body)",
-                    fontSize: "clamp(0.85rem, 2vw, 0.98rem)",
-                    lineHeight: 1.8,
-                    margin: "0 0 clamp(12px, 2vw, 18px)",
+                    fontSize: "clamp(0.8rem, 1.8vw, 0.98rem)",
+                    lineHeight: 1.75,
+                    margin: "0 0 clamp(10px, 1.5vw, 18px)",
                   }}
                 >
                   {t.privacy.accountDeletionBody}
