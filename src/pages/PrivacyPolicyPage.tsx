@@ -148,7 +148,7 @@ function SidePanel() {
         gap: 14,
         alignSelf: "start",
       }}
-      className="md:sticky md:top-24"
+      className="md:sticky md:top-24 max-sm:order-last"
     >
       <div
         style={{
@@ -281,7 +281,7 @@ export default function PrivacyPolicyPage() {
             gridTemplateColumns: "minmax(0, 1fr) auto",
             marginBottom: 32,
           }}
-          className="max-md:grid-cols-1"
+          className=\"max-sm:grid-cols-1\"
         >
           <div>
             <a
@@ -373,7 +373,7 @@ export default function PrivacyPolicyPage() {
         <div
           style={{
             display: "grid",
-            gap: 22,
+            gap: \"clamp(10px, 2.5vw, 22px)\",
             gridTemplateColumns: "minmax(0, 1fr) clamp(280px, 30vw, 320px)",
           }}
           className="max-md:grid-cols-1"
