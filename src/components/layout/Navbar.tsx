@@ -52,14 +52,14 @@ export default function Navbar() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: "12px 40px",
+              padding: "12px clamp(12px, 3vw, 40px)",
             }}
           >
             <a href="#hero" aria-label={t.common.logoAlt}>
               <img
                 src={logoUrl}
                 alt={t.common.logoAlt}
-                style={{ width: 44, height: 44, objectFit: "contain" }}
+                style={{ width: "clamp(36px, 8vw, 44px)", height: "clamp(36px, 8vw, 44px)", objectFit: "contain" }}
               />
             </a>
 
@@ -119,12 +119,12 @@ export default function Navbar() {
                   cursor: "pointer",
                   display: "inline-flex",
                   fontFamily: "var(--font-heading)",
-                  fontSize: 13,
+                  fontSize: "clamp(11px, 2vw, 13px)",
                   fontWeight: 800,
-                  height: 44,
+                  height: "clamp(36px, 8vw, 44px)",
                   justifyContent: "center",
                   lineHeight: 1,
-                  width: 44,
+                  width: "clamp(36px, 8vw, 44px)",
                 }}
               >
                 {t.common.languageButton}
@@ -229,10 +229,10 @@ export default function Navbar() {
                     onClick={handleNavClick}
                     style={{
                       fontFamily: "inherit",
-                      fontSize: 14,
+                      fontSize: "clamp(13px, 3vw, 14px)",
                       color: "rgba(122,80,56,0.85)",
                       textDecoration: "none",
-                      padding: "14px 40px",
+                      padding: "clamp(10px, 2vw, 14px) clamp(12px, 3vw, 40px)",
                       borderBottom: "1px solid rgba(193,113,36,0.08)",
                       transition: "background 0.15s",
                     }}
