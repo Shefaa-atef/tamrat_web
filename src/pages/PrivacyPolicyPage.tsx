@@ -281,7 +281,7 @@ export default function PrivacyPolicyPage() {
             gridTemplateColumns: "minmax(0, 1fr) auto",
             marginBottom: 32,
           }}
-          className=\"max-sm:grid-cols-1\"
+          className="max-sm:grid-cols-1"
         >
           <div>
             <a
@@ -373,10 +373,10 @@ export default function PrivacyPolicyPage() {
         <div
           style={{
             display: "grid",
-            gap: \"clamp(10px, 2.5vw, 22px)\",
+            gap: "clamp(10px, 2.5vw, 22px)",
             gridTemplateColumns: "minmax(0, 1fr) clamp(280px, 30vw, 320px)",
           }}
-          className="max-md:grid-cols-1"
+          className="max-sm:grid-cols-1"
         >
           <div style={{ display: "grid", gap: "clamp(12px, 2vw, 14px)" }}>
             {localizedPolicyRows.map((row, index) => (
