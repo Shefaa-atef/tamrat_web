@@ -281,223 +281,223 @@ export default function PrivacyPolicyPage() {
             gridTemplateColumns: "minmax(0, 1fr) auto",
             marginBottom: 32,
           }}
-          className=\"max-sm:grid-cols-1\"
+          className="max-sm:grid-cols-1"
         >
+        <div>
+          <a
+            href="#hero"
+            style={{
+              alignItems: "center",
+              color: "#7C3D2A",
+              display: "inline-flex",
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(0.8rem, 2vw, 0.9rem)",
+              fontWeight: 800,
+              gap: 8,
+              marginBottom: 24,
+              textDecoration: "none",
+            }}
+          >
+            <ArrowRight size={17} />
+            {t.privacy.backHome}
+          </a>
+
+          <span
+            style={{
+              background: "rgba(124,61,42,0.08)",
+              border: "1px solid rgba(124,61,42,0.10)",
+              borderRadius: 8,
+              color: "#7C3D2A",
+              display: "inline-flex",
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(0.75rem, 2vw, 0.88rem)",
+              fontWeight: 800,
+              padding: "clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 15px)",
+            }}
+          >
+            {t.privacy.updated}
+          </span>
+
+          <h1
+            style={{
+              color: "#1C0D04",
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(2.25rem, 5vw, 4.4rem)",
+              fontWeight: 900,
+              lineHeight: 1.12,
+              margin: "20px 0 18px",
+            }}
+          >
+            {t.privacy.title}
+          </h1>
+          <p
+            style={{
+              color: "#6D4B34",
+              fontFamily: "var(--font-body)",
+              fontSize: "clamp(1rem, 1.5vw, 1.18rem)",
+              lineHeight: 1.95,
+              margin: 0,
+              maxWidth: 820,
+            }}
+          >
+            {t.privacy.intro}
+          </p>
+        </div>
+
+        <div
+          style={{
+            alignItems: "center",
+            background: "#FFFFFF",
+            border: "1px solid #E8D8C7",
+            borderRadius: 8,
+            boxShadow: "0 18px 42px rgba(46,25,13,0.08)",
+            display: "flex",
+            height: "clamp(80px, 15vw, 116px)",
+            justifyContent: "center",
+            width: "clamp(80px, 15vw, 116px)",
+          }}
+        >
+          <img
+            src={logoUrl}
+            alt={t.common.logoAlt}
+            style={{
+              filter: "drop-shadow(0 12px 24px rgba(124,61,42,0.12))",
+              height: "clamp(60px, 10vw, 78px)",
+              objectFit: "contain",
+              width: "clamp(60px, 10vw, 78px)",
+            }}
+          />
+        </div>
+      </motion.div>
+
+      <div
+        style={{
+          display: "grid",
+          gap: "clamp(10px, 2.5vw, 22px)",
+          gridTemplateColumns: "minmax(0, 1fr) clamp(280px, 30vw, 320px)",
+        }}
+        className="max-sm:grid-cols-1"
+      >
+        <div style={{ display: "grid", gap: "clamp(12px, 2vw, 14px)" }}>
+        {localizedPolicyRows.map((row, index) => (
+          <PolicyRowCard key={row.title} row={row} index={index} />
+        ))}
+
+        <motion.section
+          id="account-deletion"
+          initial={{ opacity: 0, y: 58, scale: 0.96, filter: "blur(14px)" }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.76, ease }}
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(124,61,42,0.08), rgba(244,201,126,0.16))",
+            border: "1px solid #DFC6AF",
+            borderRadius: 8,
+            display: "grid",
+            gap: "clamp(12px, 2vw, 18px)",
+            gridTemplateColumns: "clamp(44px, 9vw, 54px) minmax(0, 1fr)",
+            padding: "clamp(12px, 2.5vw, 26px) clamp(12px, 2.5vw, 24px)",
+          }}
+          className="max-sm:grid-cols-1"
+        >
+          <div
+            style={{
+              alignItems: "center",
+              background: "#7C3D2A",
+              borderRadius: 8,
+              color: "#FFFFFF",
+              display: "flex",
+              height: "clamp(44px, 9vw, 54px)",
+              justifyContent: "center",
+              width: "clamp(44px, 9vw, 54px)",
+              flexShrink: 0,
+            }}
+          >
+            <Trash2 size="clamp(18, 3.5vw, 23)" strokeWidth={1.85} />
+          </div>
+
           <div>
-            <a
-              href="#hero"
-              style={{
-                alignItems: "center",
-                color: "#7C3D2A",
-                display: "inline-flex",
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(0.8rem, 2vw, 0.9rem)",
-                fontWeight: 800,
-                gap: 8,
-                marginBottom: 24,
-                textDecoration: "none",
-              }}
-            >
-              <ArrowRight size={17} />
-              {t.privacy.backHome}
-            </a>
-
-            <span
-              style={{
-                background: "rgba(124,61,42,0.08)",
-                border: "1px solid rgba(124,61,42,0.10)",
-                borderRadius: 8,
-                color: "#7C3D2A",
-                display: "inline-flex",
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(0.75rem, 2vw, 0.88rem)",
-                fontWeight: 800,
-                padding: "clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 15px)",
-              }}
-            >
-              {t.privacy.updated}
-            </span>
-
-            <h1
+            <h2
               style={{
                 color: "#1C0D04",
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(2.25rem, 5vw, 4.4rem)",
+                fontSize: "clamp(0.95rem, 2.3vw, 2rem)",
                 fontWeight: 900,
-                lineHeight: 1.12,
-                margin: "20px 0 18px",
+                lineHeight: 1.3,
+                margin: "0 0 clamp(6px, 1.5vw, 10px)",
               }}
             >
-              {t.privacy.title}
-            </h1>
+              {t.privacy.accountDeletionTitle}
+            </h2>
             <p
               style={{
                 color: "#6D4B34",
                 fontFamily: "var(--font-body)",
-                fontSize: "clamp(1rem, 1.5vw, 1.18rem)",
-                lineHeight: 1.95,
-                margin: 0,
-                maxWidth: 820,
+                fontSize: "clamp(0.8rem, 1.8vw, 0.98rem)",
+                lineHeight: 1.75,
+                margin: "0 0 clamp(10px, 1.5vw, 18px)",
               }}
             >
-              {t.privacy.intro}
+              {t.privacy.accountDeletionBody}
             </p>
-          </div>
 
-          <div
-            style={{
-              alignItems: "center",
-              background: "#FFFFFF",
-              border: "1px solid #E8D8C7",
-              borderRadius: 8,
-              boxShadow: "0 18px 42px rgba(46,25,13,0.08)",
-              display: "flex",
-              height: "clamp(80px, 15vw, 116px)",
-              justifyContent: "center",
-              width: "clamp(80px, 15vw, 116px)",
-            }}
-          >
-            <img
-              src={logoUrl}
-              alt={t.common.logoAlt}
+            <div
               style={{
-                filter: "drop-shadow(0 12px 24px rgba(124,61,42,0.12))",
-                height: "clamp(60px, 10vw, 78px)",
-                objectFit: "contain",
-                width: "clamp(60px, 10vw, 78px)",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 10,
               }}
-            />
-          </div>
-        </motion.div>
-
-        <div
-          style={{
-            display: "grid",
-            gap: \"clamp(10px, 2.5vw, 22px)\",
-            gridTemplateColumns: "minmax(0, 1fr) clamp(280px, 30vw, 320px)",
-          }}
-          className="max-md:grid-cols-1"
-        >
-          <div style={{ display: "grid", gap: "clamp(12px, 2vw, 14px)" }}>
-            {localizedPolicyRows.map((row, index) => (
-              <PolicyRowCard key={row.title} row={row} index={index} />
-            ))}
-
-            <motion.section
-              id="account-deletion"
-              initial={{ opacity: 0, y: 58, scale: 0.96, filter: "blur(14px)" }}
-              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-              viewport={{ once: false }}
-              transition={{ duration: 0.76, ease }}
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(124,61,42,0.08), rgba(244,201,126,0.16))",
-                border: "1px solid #DFC6AF",
-                borderRadius: 8,
-                display: "grid",
-                gap: "clamp(12px, 2vw, 18px)",
-                gridTemplateColumns: "clamp(44px, 9vw, 54px) minmax(0, 1fr)",
-                padding: "clamp(12px, 2.5vw, 26px) clamp(12px, 2.5vw, 24px)",
-              }}
-              className="max-sm:grid-cols-1"
             >
-              <div
+              <a
+                href={deletionEmailUrl}
+                target="_blank"
+                rel="noreferrer"
                 style={{
                   alignItems: "center",
                   background: "#7C3D2A",
                   borderRadius: 8,
                   color: "#FFFFFF",
-                  display: "flex",
-                  height: "clamp(44px, 9vw, 54px)",
-                  justifyContent: "center",
-                  width: "clamp(44px, 9vw, 54px)",
-                  flexShrink: 0,
+                  display: "inline-flex",
+                  fontFamily: "var(--font-heading)",
+                  fontSize: "0.94rem",
+                  fontWeight: 800,
+                  gap: 8,
+                  padding: "12px 16px",
+                  textDecoration: "none",
                 }}
               >
-                <Trash2 size="clamp(18, 3.5vw, 23)" strokeWidth={1.85} />
-              </div>
-
-              <div>
-                <h2
-                  style={{
-                    color: "#1C0D04",
-                    fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(0.95rem, 2.3vw, 2rem)",
-                    fontWeight: 900,
-                    lineHeight: 1.3,
-                    margin: "0 0 clamp(6px, 1.5vw, 10px)",
-                  }}
-                >
-                  {t.privacy.accountDeletionTitle}
-                </h2>
-                <p
-                  style={{
-                    color: "#6D4B34",
-                    fontFamily: "var(--font-body)",
-                    fontSize: "clamp(0.8rem, 1.8vw, 0.98rem)",
-                    lineHeight: 1.75,
-                    margin: "0 0 clamp(10px, 1.5vw, 18px)",
-                  }}
-                >
-                  {t.privacy.accountDeletionBody}
-                </p>
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 10,
-                  }}
-                >
-                  <a
-                    href={deletionEmailUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      alignItems: "center",
-                      background: "#7C3D2A",
-                      borderRadius: 8,
-                      color: "#FFFFFF",
-                      display: "inline-flex",
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "0.94rem",
-                      fontWeight: 800,
-                      gap: 8,
-                      padding: "12px 16px",
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Mail size={17} />
-                    {t.privacy.requestDeletion}
-                  </a>
-                  <a
-                    href={APP_LINKS.contactEmail}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      alignItems: "center",
-                      background: "#FFFFFF",
-                      border: "1px solid #DCC2AA",
-                      borderRadius: 8,
-                      color: "#7C3D2A",
-                      display: "inline-flex",
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "0.94rem",
-                      fontWeight: 800,
-                      padding: "12px 16px",
-                      textDecoration: "none",
-                    }}
-                  >
-                    {t.privacy.contactUs}
-                  </a>
-                </div>
-              </div>
-            </motion.section>
+                <Mail size={17} />
+                {t.privacy.requestDeletion}
+              </a>
+              <a
+                href={APP_LINKS.contactEmail}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  alignItems: "center",
+                  background: "#FFFFFF",
+                  border: "1px solid #DCC2AA",
+                  borderRadius: 8,
+                  color: "#7C3D2A",
+                  display: "inline-flex",
+                  fontFamily: "var(--font-heading)",
+                  fontSize: "0.94rem",
+                  fontWeight: 800,
+                  padding: "12px 16px",
+                  textDecoration: "none",
+                }}
+              >
+                {t.privacy.contactUs}
+              </a>
+            </div>
           </div>
+        </motion.section>
+      </div>
 
-          <SidePanel />
-        </div>
-      </section>
-    </main>
+      <SidePanel />
+    </div>
+    </section>
+  </main>
   );
 }
