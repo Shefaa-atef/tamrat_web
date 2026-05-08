@@ -76,6 +76,7 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
 
   return (
     <motion.article
+      className="privacy-policy-card max-sm:grid-cols-1"
       initial={{ opacity: 0, y: 50, scale: 0.96, filter: "blur(12px)" }}
       whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
       viewport={{ once: false, margin: "-40px" }}
@@ -90,9 +91,9 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
         gridTemplateColumns: "clamp(36px, 8vw, 48px) minmax(0, 1fr)",
         padding: "clamp(12px, 2.5vw, 22px)",
       }}
-      className="max-sm:grid-cols-1"
     >
       <div
+        className="privacy-policy-card__icon"
         style={{
           alignItems: "center",
           background: "#FFF4E8",
@@ -106,11 +107,12 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
           flexShrink: 0,
         }}
       >
-        <Icon size="clamp(16, 3.5vw, 21)" strokeWidth={1.85} />
+        <Icon size={21} strokeWidth={1.85} />
       </div>
 
       <div>
         <h2
+          className="privacy-policy-card__title"
           style={{
             color: "#1C0D04",
             fontFamily: "var(--font-heading)",
@@ -123,6 +125,7 @@ function PolicyRowCard({ row, index }: { row: PolicyRow; index: number }) {
           {row.title}
         </h2>
         <p
+          className="privacy-policy-card__body"
           style={{
             color: "#6D4B34",
             fontFamily: "var(--font-body)",
@@ -143,14 +146,15 @@ function SidePanel() {
 
   return (
     <aside
+      className="privacy-side-panel md:sticky md:top-24 max-sm:order-last"
       style={{
         display: "grid",
         gap: 14,
         alignSelf: "start",
       }}
-      className="md:sticky md:top-24 max-sm:order-last"
     >
       <div
+        className="privacy-summary-card"
         style={{
           background: "#1C0D04",
           borderRadius: 8,
@@ -160,11 +164,12 @@ function SidePanel() {
         }}
       >
         <CalendarHeart
-          size="clamp(18, 3.5vw, 24)"
+          size={24}
           strokeWidth={1.8}
           style={{ color: "#F4C97E", marginBottom: "clamp(8px, 1.5vw, 14px)" }}
         />
         <h2
+          className="privacy-summary-title"
           style={{
             fontFamily: "var(--font-heading)",
             fontSize: "clamp(0.95rem, 2.3vw, 1.18rem)",
@@ -175,10 +180,14 @@ function SidePanel() {
         >
           {t.privacy.summaryTitle}
         </h2>
-        <div style={{ display: "grid", gap: "clamp(7px, 1.5vw, 10px)" }}>
+        <div
+          className="privacy-summary-facts"
+          style={{ display: "grid", gap: "clamp(7px, 1.5vw, 10px)" }}
+        >
           {t.privacy.quickFacts.map((fact) => (
             <div
               key={fact}
+              className="privacy-summary-fact"
               style={{
                 alignItems: "flex-start",
                 display: "flex",
@@ -186,7 +195,7 @@ function SidePanel() {
               }}
             >
               <CheckCircle2
-                size="clamp(14, 2.5vw, 17)"
+                size={17}
                 strokeWidth={2}
                 style={{ color: "#F4C97E", flexShrink: 0, marginTop: "clamp(1px, 0.5vw, 4px)" }}
               />
@@ -209,6 +218,7 @@ function SidePanel() {
         href={APP_LINKS.contactEmail}
         target="_blank"
         rel="noreferrer"
+        className="privacy-contact-card"
         style={{
           background: "#FFFFFF",
           border: "1px solid #E8D8C7",
@@ -223,6 +233,7 @@ function SidePanel() {
       >
         <Mail size={22} strokeWidth={1.8} style={{ color: "#7C3D2A" }} />
         <strong
+          className="privacy-contact-title"
           style={{
             fontFamily: "var(--font-heading)",
             fontSize: "1rem",
@@ -233,6 +244,7 @@ function SidePanel() {
         </strong>
         <span
           dir="ltr"
+          className="privacy-contact-email"
           style={{
             color: "#8B6E52",
             fontFamily: "var(--font-body)",
@@ -262,6 +274,7 @@ export default function PrivacyPolicyPage() {
   return (
     <main
       dir={dir}
+      className="privacy-page"
       style={{
         background:
           "linear-gradient(180deg, #FEF8EE 0%, #FFFFFF 32%, #FFF8EF 100%)",
@@ -269,8 +282,12 @@ export default function PrivacyPolicyPage() {
         padding: "clamp(80px, 10vw, 112px) clamp(16px, 4vw, 80px) clamp(60px, 8vw, 84px)",
       }}
     >
-      <section style={{ margin: "0 auto", maxWidth: "min(100%, 1180px)", width: "100%", boxSizing: "border-box" }}>
+      <section
+        className="privacy-shell"
+        style={{ margin: "0 auto", maxWidth: "min(100%, 1180px)", width: "100%", boxSizing: "border-box" }}
+      >
         <motion.div
+          className="privacy-hero max-sm:grid-cols-1"
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease }}
@@ -281,11 +298,11 @@ export default function PrivacyPolicyPage() {
             gridTemplateColumns: "minmax(0, 1fr) auto",
             marginBottom: 32,
           }}
-          className="max-sm:grid-cols-1"
         >
-          <div>
+          <div className="privacy-hero__copy">
             <a
               href="#hero"
+              className="privacy-back-link"
               style={{
                 alignItems: "center",
                 color: "#7C3D2A",
@@ -303,6 +320,7 @@ export default function PrivacyPolicyPage() {
             </a>
 
             <span
+              className="privacy-updated"
               style={{
                 background: "rgba(124,61,42,0.08)",
                 border: "1px solid rgba(124,61,42,0.10)",
@@ -319,6 +337,7 @@ export default function PrivacyPolicyPage() {
             </span>
 
             <h1
+              className="privacy-title"
               style={{
                 color: "#1C0D04",
                 fontFamily: "var(--font-heading)",
@@ -331,6 +350,7 @@ export default function PrivacyPolicyPage() {
               {t.privacy.title}
             </h1>
             <p
+              className="privacy-intro"
               style={{
                 color: "#6D4B34",
                 fontFamily: "var(--font-body)",
@@ -345,6 +365,7 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <div
+            className="privacy-logo-card"
             style={{
               alignItems: "center",
               background: "#FFFFFF",
@@ -371,20 +392,24 @@ export default function PrivacyPolicyPage() {
         </motion.div>
 
         <div
+          className="privacy-layout max-sm:grid-cols-1"
           style={{
             display: "grid",
             gap: "clamp(10px, 2.5vw, 22px)",
             gridTemplateColumns: "minmax(0, 1fr) clamp(280px, 30vw, 320px)",
           }}
-          className="max-sm:grid-cols-1"
         >
-          <div style={{ display: "grid", gap: "clamp(12px, 2vw, 14px)" }}>
+          <div
+            className="privacy-list"
+            style={{ display: "grid", gap: "clamp(12px, 2vw, 14px)" }}
+          >
             {localizedPolicyRows.map((row, index) => (
               <PolicyRowCard key={row.title} row={row} index={index} />
             ))}
 
             <motion.section
               id="account-deletion"
+              className="privacy-delete-card max-sm:grid-cols-1"
               initial={{ opacity: 0, y: 58, scale: 0.96, filter: "blur(14px)" }}
               whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
               viewport={{ once: false }}
@@ -399,9 +424,9 @@ export default function PrivacyPolicyPage() {
                 gridTemplateColumns: "clamp(44px, 9vw, 54px) minmax(0, 1fr)",
                 padding: "clamp(12px, 2.5vw, 26px) clamp(12px, 2.5vw, 24px)",
               }}
-              className="max-sm:grid-cols-1"
             >
               <div
+                className="privacy-delete-icon"
                 style={{
                   alignItems: "center",
                   background: "#7C3D2A",
@@ -414,11 +439,12 @@ export default function PrivacyPolicyPage() {
                   flexShrink: 0,
                 }}
               >
-                <Trash2 size="clamp(18, 3.5vw, 23)" strokeWidth={1.85} />
+                <Trash2 size={23} strokeWidth={1.85} />
               </div>
 
               <div>
                 <h2
+                  className="privacy-delete-title"
                   style={{
                     color: "#1C0D04",
                     fontFamily: "var(--font-heading)",
@@ -431,6 +457,7 @@ export default function PrivacyPolicyPage() {
                   {t.privacy.accountDeletionTitle}
                 </h2>
                 <p
+                  className="privacy-delete-body"
                   style={{
                     color: "#6D4B34",
                     fontFamily: "var(--font-body)",
@@ -443,6 +470,7 @@ export default function PrivacyPolicyPage() {
                 </p>
 
                 <div
+                  className="privacy-delete-actions"
                   style={{
                     display: "flex",
                     flexWrap: "wrap",
@@ -453,6 +481,7 @@ export default function PrivacyPolicyPage() {
                     href={deletionEmailUrl}
                     target="_blank"
                     rel="noreferrer"
+                    className="privacy-delete-action privacy-delete-action--primary"
                     style={{
                       alignItems: "center",
                       background: "#7C3D2A",
@@ -474,6 +503,7 @@ export default function PrivacyPolicyPage() {
                     href={APP_LINKS.contactEmail}
                     target="_blank"
                     rel="noreferrer"
+                    className="privacy-delete-action"
                     style={{
                       alignItems: "center",
                       background: "#FFFFFF",

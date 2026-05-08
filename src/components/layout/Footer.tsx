@@ -6,6 +6,7 @@ function FooterLink({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
+      className="site-footer__link"
       style={{
         color: "#6D4B34",
         fontFamily: "var(--font-body)",
@@ -30,6 +31,7 @@ export default function Footer() {
   return (
     <footer
       dir={dir}
+      className="site-footer"
       style={{
         background:
           "linear-gradient(180deg, #FFFFFF 0%, #FFF8EF 48%, #F7ECDE 100%)",
@@ -38,6 +40,7 @@ export default function Footer() {
       }}
     >
       <div
+        className="site-footer__inner"
         style={{
           width: "100%",
           maxWidth: 1180,
@@ -45,6 +48,7 @@ export default function Footer() {
         }}
       >
         <div
+          className="site-footer__brand-row max-sm:grid-cols-1 max-sm:gap-2"
           style={{
             alignItems: "center",
             borderBottom: "1px solid rgba(124,61,42,0.12)",
@@ -53,11 +57,11 @@ export default function Footer() {
             gridTemplateColumns: "minmax(0,1fr) auto",
             padding: "clamp(16px, 3vw, 30px) 0 clamp(16px, 3vw, 24px)",
           }}
-          className="max-sm:grid-cols-1 max-sm:gap-2"
         >
           <a
             href="#hero"
             aria-label={t.common.logoAlt}
+            className="site-footer__brand"
             style={{
               alignItems: "center",
               color: "#1C0D04",
@@ -70,6 +74,7 @@ export default function Footer() {
             <img
               src={logoUrl}
               alt={t.common.logoAlt}
+              className="site-footer__logo"
               style={{
                 filter: "drop-shadow(0 8px 18px rgba(124,61,42,0.12))",
                 height: "clamp(40px, 8vw, 50px)",
@@ -77,8 +82,12 @@ export default function Footer() {
                 width: "clamp(40px, 8vw, 50px)",
               }}
             />
-            <span style={{ display: "grid", gap: "clamp(1px, 0.5vw, 3px)", minWidth: 0 }}>
+            <span
+              className="site-footer__brand-text"
+              style={{ display: "grid", gap: "clamp(1px, 0.5vw, 3px)", minWidth: 0 }}
+            >
               <strong
+                className="site-footer__brand-name"
                 style={{
                   color: "#1C0D04",
                   fontFamily: "var(--font-heading)",
@@ -90,6 +99,7 @@ export default function Footer() {
                 {t.common.appName}
               </strong>
               <span
+                className="site-footer__tagline"
                 style={{
                   color: "#8B6E52",
                   fontFamily: "var(--font-body)",
@@ -106,6 +116,7 @@ export default function Footer() {
             href={APP_LINKS.contactEmail}
             target="_blank"
             rel="noreferrer"
+            className="site-footer__contact"
             style={{
               alignItems: "center",
               background: "#FFFFFF",
@@ -127,6 +138,7 @@ export default function Footer() {
             {t.footer.contact}
             <span
               dir="ltr"
+              className="site-footer__contact-email"
               style={{
                 color: "#9A7256",
                 fontFamily: "var(--font-body)",
@@ -140,6 +152,7 @@ export default function Footer() {
         </div>
 
         <div
+          className="site-footer__bottom max-sm:grid-cols-1 max-sm:text-center"
           style={{
             alignItems: "center",
             display: "grid",
@@ -147,16 +160,15 @@ export default function Footer() {
             gridTemplateColumns: "1fr auto",
             paddingTop: "clamp(14px, 2vw, 22px)",
           }}
-          className="max-sm:grid-cols-1 max-sm:text-center"
         >
           <div
+            className="site-footer__links max-sm:flex-col max-sm:gap-2"
             style={{
               display: "flex",
               flexWrap: "wrap",
               gap: "clamp(8px, 2vw, 12px) clamp(12px, 2.5vw, 20px)",
               justifyContent: "center",
             }}
-            className="max-sm:flex-col max-sm:gap-2"
           >
             {t.footer.productLinks.map((link) => (
               <FooterLink key={link.href} {...link} />
@@ -167,6 +179,7 @@ export default function Footer() {
           </div>
 
           <p
+            className="site-footer__copyright"
             style={{
               color: "#9A7256",
               fontFamily: "var(--font-body)",
