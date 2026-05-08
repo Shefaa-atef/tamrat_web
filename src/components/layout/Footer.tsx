@@ -9,9 +9,10 @@ function FooterLink({ label, href }: { label: string; href: string }) {
       style={{
         color: "#6D4B34",
         fontFamily: "var(--font-body)",
-        fontSize: "0.92rem",
-        lineHeight: 1.7,
+        fontSize: "clamp(0.75rem, 1.8vw, 0.92rem)",
+        lineHeight: 1.6,
         textDecoration: "none",
+        display: "block",
       }}
     >
       {label}
@@ -33,7 +34,7 @@ export default function Footer() {
         background:
           "linear-gradient(180deg, #FFFFFF 0%, #FFF8EF 48%, #F7ECDE 100%)",
         borderTop: "1px solid #EADACA",
-        padding: "0 clamp(20px, 5vw, 80px) 30px",
+        padding: "clamp(12px, 3vw, 30px) clamp(12px, 3vw, 80px)",
       }}
     >
       <div
@@ -48,11 +49,11 @@ export default function Footer() {
             alignItems: "center",
             borderBottom: "1px solid rgba(124,61,42,0.12)",
             display: "grid",
-            gap: 22,
+            gap: "clamp(12px, 2vw, 22px)",
             gridTemplateColumns: "minmax(0,1fr) auto",
-            padding: "30px 0 24px",
+            padding: "clamp(16px, 3vw, 30px) 0 clamp(16px, 3vw, 24px)",
           }}
-          className="max-md:grid-cols-1"
+          className="max-sm:grid-cols-1 max-sm:gap-2"
         >
           <a
             href="#hero"
@@ -61,7 +62,7 @@ export default function Footer() {
               alignItems: "center",
               color: "#1C0D04",
               display: "inline-flex",
-              gap: 14,
+              gap: "clamp(8px, 2vw, 14px)",
               minWidth: 0,
               textDecoration: "none",
             }}
@@ -71,17 +72,17 @@ export default function Footer() {
               alt={t.common.logoAlt}
               style={{
                 filter: "drop-shadow(0 8px 18px rgba(124,61,42,0.12))",
-                height: 50,
+                height: "clamp(40px, 8vw, 50px)",
                 objectFit: "contain",
-                width: 50,
+                width: "clamp(40px, 8vw, 50px)",
               }}
             />
-            <span style={{ display: "grid", gap: 3, minWidth: 0 }}>
+            <span style={{ display: "grid", gap: "clamp(1px, 0.5vw, 3px)", minWidth: 0 }}>
               <strong
                 style={{
                   color: "#1C0D04",
                   fontFamily: "var(--font-heading)",
-                  fontSize: "1.12rem",
+                  fontSize: "clamp(0.9rem, 2.2vw, 1.12rem)",
                   fontWeight: 800,
                   lineHeight: 1.3,
                 }}
@@ -92,8 +93,8 @@ export default function Footer() {
                 style={{
                   color: "#8B6E52",
                   fontFamily: "var(--font-body)",
-                  fontSize: "0.88rem",
-                  lineHeight: 1.6,
+                  fontSize: "clamp(0.7rem, 1.5vw, 0.88rem)",
+                  lineHeight: 1.5,
                 }}
               >
                 {t.footer.tagline}
@@ -114,11 +115,11 @@ export default function Footer() {
               color: "#7C3D2A",
               display: "inline-flex",
               fontFamily: "var(--font-heading)",
-              fontSize: "0.93rem",
+              fontSize: "clamp(0.75rem, 1.8vw, 0.93rem)",
               fontWeight: 800,
-              gap: 8,
+              gap: "clamp(4px, 1vw, 8px)",
               justifyContent: "center",
-              padding: "12px 16px",
+              padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)",
               textDecoration: "none",
               whiteSpace: "nowrap",
             }}
@@ -129,7 +130,7 @@ export default function Footer() {
               style={{
                 color: "#9A7256",
                 fontFamily: "var(--font-body)",
-                fontSize: "0.86rem",
+                fontSize: "clamp(0.7rem, 1.5vw, 0.86rem)",
                 fontWeight: 600,
               }}
             >
@@ -142,18 +143,20 @@ export default function Footer() {
           style={{
             alignItems: "center",
             display: "grid",
-            gap: 18,
+            gap: "clamp(10px, 2vw, 18px)",
             gridTemplateColumns: "1fr auto",
-            paddingTop: 22,
+            paddingTop: "clamp(14px, 2vw, 22px)",
           }}
-          className="max-md:grid-cols-1"
+          className="max-sm:grid-cols-1 max-sm:text-center"
         >
           <div
             style={{
               display: "flex",
               flexWrap: "wrap",
-              gap: "12px 20px",
+              gap: "clamp(8px, 2vw, 12px) clamp(12px, 2.5vw, 20px)",
+              justifyContent: "center",
             }}
+            className="max-sm:flex-col max-sm:gap-2"
           >
             {t.footer.productLinks.map((link) => (
               <FooterLink key={link.href} {...link} />
@@ -167,8 +170,8 @@ export default function Footer() {
             style={{
               color: "#9A7256",
               fontFamily: "var(--font-body)",
-              fontSize: "0.82rem",
-              lineHeight: 1.7,
+              fontSize: "clamp(0.7rem, 1.5vw, 0.82rem)",
+              lineHeight: 1.6,
               margin: 0,
             }}
           >
